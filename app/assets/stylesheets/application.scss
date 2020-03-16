@@ -17,6 +17,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
 .user-header {
 	height: 150px;
 	border: 1px solid #000000;
@@ -40,4 +41,32 @@
 
 .user-header-link a {
 	color: #000000;
+
+.admin-header-inner{
+	padding-top:15px;
+	padding-bottom:15px;
+	height:110px;
+	background-color:#f1f1f1;
+}
+.admin-header-clearfix:after{
+	content:"";
+	display:block;
+	clear:both;
+}
+.admin-header-nav{
+	height:30px;
+}
+.admin-header-ul{
+	float:right;
+	list-style:none;
+	height:20px;
+}
+.admin-header-li{
+	display:inline;
+	padding-left:10px;
+}
+.admin-header-search{
+	padding-top:20px;
+	float:right;
+	display:inline-block;
 }
