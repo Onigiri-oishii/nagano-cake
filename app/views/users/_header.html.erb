@@ -1,0 +1,24 @@
+<header class="user-header navbar navbar-fixed-top">
+  <div class="container">
+    <nav class="nav navbar-nav navbar-left">
+      <%= link_to root_path do %>
+        <h1 class="user-header-logo">LOGO</h1><!-- 店舗ロゴ作成後<img>要素に変更 -->
+      <% end %>
+    </nav>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <p class="user-header-text navbar-text">ようこそ、<%= current_user.lastname %> さん！</p>
+          <li class="user-header-link"><%= link_to "マイページ", user_path(current_user) %></li>
+          <li class="user-header-link"><%= link_to "商品一覧", products_path %></li>
+          <li class="user-header-link"><%= link_to "カート", user_cart_products_path(current_user) %></li>
+          <li class="user-header-link"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li class="user-header-link"><%= link_to "商品一覧", products_path %></li>
+          <li class="user-header-link"><%= link_to "新規登録", new_user_registration_path %></li>
+          <li class="user-header-link"><%= link_to "ログイン", new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>
