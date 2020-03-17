@@ -1,2 +1,45 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<%= render 'header' %>
+
+<div class="container">
+	<div class="row">
+		<h3 class="mypage-title">マイページ</h3>
+		<div class="mypage-content col-md-9">
+			<h4 class="mypage-headline-4l">登録情報</h4>
+			<%= link_to "編集する", edit_user_path(current_user), class: 'btn btn-primary active' %>
+			<%= link_to "パスワードを変更する", edit_user_password_path, class: 'btn btn-primary active' %>
+			<!-- パスワード編集画面へのリンクで、ログイン時にはルートへ遷移されます(deviseの特性上) -->
+			<table class="table table-bordered">
+				<tbody class="profile-list">
+					<tr>
+						<th class="profile-list-title active col-md-3">氏名</th>
+						<td class="col-md-9"><%= "#{current_user.lastname + "　" + current_user.firstname}" %></td>
+					</tr>
+					<tr>
+						<th class="profile-list-title active col-md-3">カナ</th>
+						<td class="col-md-9"><%= "#{current_user.lastname_kana + "　" + current_user.firstname_kana}" %></td>
+					</tr>
+					<tr>
+						<th class="profile-list-title active col-md-3">郵便番号</th>
+						<td class="col-md-9"><%= "#{current_user.postal}" %></td>
+					</tr>
+					<tr>
+						<th class="profile-list-title active col-md-3">住所</th>
+						<td class="col-md-9"><%= "#{current_user.address}" %></td>
+					</tr>
+					<tr>
+						<th class="profile-list-title active col-md-3">電話番号</th>
+						<td class="col-md-9"><%= "#{current_user.telephone}" %></td>
+					</tr>
+					<tr>
+						<th class="profile-list-title active col-md-3">メールアドレス</th>
+						<td class="col-md-9"><%= "#{current_user.email}" %></td>
+					</tr>
+				</tbody>
+			</table>
+			<h4 class="mypage-headline-3l">配送先</h4>
+			<%= link_to "一覧を見る", user_receivers_path(current_user), class: 'btn btn-primary active' %><br>
+			<h4 class="mypage-headline-4l">注文履歴</h4>
+			<%= link_to "一覧を見る", orders_path, class: 'btn btn-primary active' %>
+		</div>
+	</div>
+</div>
