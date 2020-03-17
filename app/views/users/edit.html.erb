@@ -1,2 +1,65 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<%= render "users/header" %>
+
+<div class="container">
+
+  <span class="row text-center">
+    <h4 class="col-md-2" style="margin: 30px 0px 30px 150px; padding-left: 10px; background-color: rgba(192,192,192,0.5);">登録情報編集</h4>
+  </span> 
+
+  <%= form_for(@user) do |f| %>
+     <% if @user.errors.any? %>
+       <%= @user.errors.count %>error prohibited this obj from being saved
+       <%= @user.errors.full_messages.each do |message| %>
+         <%= message %>
+       <% end %>
+     <% end %> 
+    <div class="row">
+      <div class="col-md-2 col-md-offset-1">名前</div>
+      <div class="col-md-1 text-right">(姓)</div>
+      <div class="col-md-2"><%= f.text_field :lastname, class: "panel panel-default"  %></div>
+      <div class="col-md-1 text-right">(名)</div>
+      <div class="col-md-2"><%= f.text_field :firstname, class: "panel panel-default"  %></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 col-md-offset-1">フリガナ</div>
+        <div class="col-md-1 text-right">(セイ)</div>
+        <div class="col-md-2"><%= f.text_field :lastname_kana, class: "panel panel-default"  %></div>
+        <div class="col-md-1 text-right">(メイ)</div>
+        <div class="col-md-2"><%= f.text_field :firstname_kana, class: "panel panel-default"  %></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-md-offset-1">メールアドレス</div>
+        <div class="col-md-2"><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "panel panel-default"  %></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-md-offset-1">郵便番号(ハイフンなし)</div>
+        <div class="col-md-2"><%= f.text_field :postal, class: "panel panel-default"  %></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-md-offset-1">住所</div>
+        <div class="col-md-5"><%= f.text_field :address, :size=>"61", class: "panel panel-default"  %></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-md-offset-1">電話番号(ハイフンなし)</div>
+        <div class="col-md-2"><%= f.telephone_field :telephone, class: "panel panel-default"  %></div>
+    </div>
+
+    <%= f.hidden_field :password, :value => :password %>  
+    <%= f.hidden_field :password_confirmation, :value => :password %>
+
+    <div class="row" style="margin-top: 20px;">
+      <div class="col-md-3 col-md-offset-2">
+        <%= f.submit "編集内容を保存する", class: "btn btn-primary btn-block" %>
+      </div>
+      <div class="col-md-2 col-md-offset-2">
+        <%= link_to "退会する", users_confirm_path, class: "btn btn-danger btn-block" %>
+      </div>
+    </div>
+  <% end %>
+
+</div>
