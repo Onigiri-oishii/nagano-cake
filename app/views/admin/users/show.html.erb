@@ -1,2 +1,61 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+
+<%= render 'admin/home/header' %>
+
+<div class="container" id="admin-users-show">
+
+  <div class="container">
+
+  	<h3 class="title">会員詳細画面</h3>
+
+      <div class="container">
+
+        <div class="row text">
+          <div class="col-md-2">顧客ID</div>
+          <div class="col-md-10"><%= @user.id %>
+            <% if @user.status == true %>
+              <span class="status-label-true">有効会員</span>
+            <% else %>
+              <span class="status-label-false">無効会員</span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row text">
+          <div class="col-md-2">氏名</div>
+          <div class="col-md-10"><%= @user.lastname %> <%= @user.firstname %></div>
+        </div>
+
+        <div class="row text">
+          <div class="col-md-2">フリガナ</div>
+          <div class="col-md-10"><%= @user.lastname_kana %> <%= @user.firstname_kana %></div>
+        </div>
+
+        <div class="row text">
+          <div class="col-md-2">郵便番号</div>
+          <div class="col-md-1"><%= @user.postal %></div>
+        </div>
+
+        <div class="row text">
+          <div class="col-md-2">住所</div>
+          <div class="col-md-10"><%= @user.address %></div>
+        </div>
+
+        <div class="row text">
+          <div class="col-md-2">電話番号</div>
+          <div class="col-md-1"><%= @user.telephone %></div>
+        </div>
+
+        <div class="row text">
+          <div class="col-md-2">メールアドレス</div>
+          <div class="col-md-1"><%= @user.email %></div>
+        </div>
+        
+        <div class="row bottan-box">
+          <%= link_to "編集する", edit_admin_user_path, class: 'btn btn-primary' %>
+          <%= link_to "注文履歴一覧を見る", admin_orders_path, class: 'btn btn-primary orders-bottan' %>
+        </div>
+
+      </div>
+  </div>
+	
+<div>
