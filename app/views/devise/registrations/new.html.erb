@@ -1,10 +1,10 @@
 
 <%= render "users/header" %>
 
-<div class="container">
+<div class="container" id="registration-new">
 
   <span class="row text-center">
-    <h4 class="col-md-2" style="margin: 30px 0px 30px 150px; padding-left: 10px; background-color: rgba(192,192,192,0.5);">新規会員登録</h4>
+    <h4 class="col-md-2 title">新規会員登録</h4>
   </span> 
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -56,18 +56,18 @@
     </div>
 
     <div class="row">
-      <div class="col-md-3 col-md-offset-5" style="margin-top: 20px;">
+      <div class="col-md-3 col-md-offset-5 submit-btn">
         <%= f.submit "新規登録", class: "btn btn-success btn-block " %>
       </div>
     </div>
   <% end %>
 
     <span class="row text-center">
-      <h4 class="col-md-2" style="margin: 30px 0px 30px 150px; padding-left: 10px; background-color: rgba(192,192,192,0.5);">既に登録済みの方</h4>
+      <h4 class="col-md-2 subtitle">既に登録済みの方</h4>
     </span> 
 
     <div class="row">
-      <div class="col-md-3 col-md-offset-2" style="margin: 0px 0px 100px 180px;">
+      <div class="col-md-3 col-md-offset-2 link-box">
         <%= link_to "こちら", new_user_session_path(resource) %>からログインしてください。
       </div>
     </div>
