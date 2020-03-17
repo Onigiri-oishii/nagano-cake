@@ -1,2 +1,12 @@
-<h1>Admin::Home#top</h1>
-<p>Find me in app/views/admin/home/top.html.erb</p>
+<%= render 'header' %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 admin-top-main">
+			<h2 class="admin-top-title">管理者画面</h2>
+			<h2 class="admin-top-content">
+				本日の注文件数　　　<%= link_to "#{@orders.count}", orders_path %>　件
+			</h2>
+		</div>
+	</div>
+</div>
