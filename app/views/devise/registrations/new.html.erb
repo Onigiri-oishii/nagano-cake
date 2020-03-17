@@ -1,29 +1,72 @@
-<h2>Sign up</h2>
+<div class="container">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <span class="row text-center">
+    <h4 class="col-md-2" style="margin: 30px 0px 30px 150px; padding-left: 10px; background-color: rgba(192,192,192,0.5);">新規会員登録</h4>
+  </span> 
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="row" style="padding: 5px;">
+      <div class="col-md-2 col-md-offset-1">名前</div>
+      <div class="col-md-1 text-right">(姓)</div>
+      <div class="col-md-2"><%= f.text_field :lastname, class: "panel panel-default"  %></div>
+      <div class="col-md-1 text-right">(名)</div>
+      <div class="col-md-2"><%= f.text_field :firstname, class: "panel panel-default"  %></div>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+    <div class="row">
+      <div class="col-md-2 col-md-offset-1">フリガナ</div>
+        <div class="col-md-1 text-right">(セイ)</div>
+        <div class="col-md-2"><%= f.text_field :lastname_kana, class: "panel panel-default"  %></div>
+        <div class="col-md-1 text-right">(メイ)</div>
+        <div class="col-md-2"><%= f.text_field :firstname_kana, class: "panel panel-default"  %></div>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="row">
+      <div class="col-md-3 col-md-offset-1">メールアドレス</div>
+        <div class="col-md-2"><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "panel panel-default"  %></div>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+    <div class="row">
+      <div class="col-md-3 col-md-offset-1">郵便番号(ハイフンなし)</div>
+        <div class="col-md-2"><%= f.text_field :postal, class: "panel panel-default"  %></div>
+    </div>
 
-<%= render "devise/shared/links" %>
+    <div class="row">
+      <div class="col-md-3 col-md-offset-1">住所</div>
+        <div class="col-md-5"><%= f.text_field :address, :size=>"61", class: "panel panel-default"  %></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-md-offset-1">電話番号(ハイフンなし)</div>
+        <div class="col-md-2"><%= f.telephone_field :telephone, class: "panel panel-default"  %></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-md-offset-1">パスワード(6文字以上)</div>
+        <div class="col-md-2"><%= f.password_field :password, autocomplete: "new-password", class: "panel panel-default"  %></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-md-offset-1">パスワード(確認用)</div>
+        <div class="col-md-2" ><%= f.password_field :password_confirmation, autocomplete: "new-password", class: "panel panel-default" %></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-md-offset-5" style="margin-top: 20px;">
+        <%= f.submit "新規登録", class: "btn btn-success btn-block " %>
+      </div>
+    </div>
+  <% end %>
+
+    <span class="row text-center">
+      <h4 class="col-md-2" style="margin: 30px 0px 30px 150px; padding-left: 10px; background-color: rgba(192,192,192,0.5);">既に登録済みの方</h4>
+    </span> 
+
+    <div class="row">
+      <div class="col-md-3 col-md-offset-2" style="margin: 0px 0px 100px 180px;">
+        <%= link_to "こちら", new_registration_path(resource_name) %>からログインしてください。
+      </div>
+    </div>
+
+</div>
