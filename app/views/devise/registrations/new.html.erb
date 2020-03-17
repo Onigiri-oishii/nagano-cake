@@ -1,3 +1,6 @@
+
+<%= render "users/header" %>
+
 <div class="container">
 
   <span class="row text-center">
@@ -6,7 +9,7 @@
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
-    <div class="row" style="padding: 5px;">
+    <div class="row">
       <div class="col-md-2 col-md-offset-1">名前</div>
       <div class="col-md-1 text-right">(姓)</div>
       <div class="col-md-2"><%= f.text_field :lastname, class: "panel panel-default"  %></div>
@@ -65,7 +68,7 @@
 
     <div class="row">
       <div class="col-md-3 col-md-offset-2" style="margin: 0px 0px 100px 180px;">
-        <%= link_to "こちら", new_registration_path(resource_name) %>からログインしてください。
+        <%= link_to "こちら", new_user_session_path(resource) %>からログインしてください。
       </div>
     </div>
 
