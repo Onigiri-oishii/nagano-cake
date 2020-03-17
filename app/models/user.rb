@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :firstname_kana, presence: true, length: {in:1..20}
   validates :lastname_kana, presence: true, length: {in:1..20}
   validates :email, presence: true
-  validates :encrypted_password, presence: true, length: {in:6..20}
+  validates :password, presence: true, length: {in:6..20}
   validates :postal, presence: true
   validates :address, presence: true
   validates :telephone, presence: true
