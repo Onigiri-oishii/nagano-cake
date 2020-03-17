@@ -1,0 +1,26 @@
+<%= render "admin/home/header" %>
+
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<div class="admin-login">
+  <table class="admin-login-table">
+
+    <tr class="field admin-login-mail">
+      <td><%= f.label :メールアドレス %></td>
+      <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+    </tr>
+
+    <tr class="field admin-login-password">  
+      <td><%= f.label :パスワード %></td>
+      <td><%= f.password_field :password, autocomplete: "current-password" %></td>
+    </tr>
+
+  </table>
+
+  <div class="actions admin-login-submit">
+    <%= f.submit "ログイン" ,class: "btn btn-info"%>
+  </div>
+</div>
+
+<% end %>
+
