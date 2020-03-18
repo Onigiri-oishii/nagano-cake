@@ -1,2 +1,73 @@
-<h1>Receivers#index</h1>
-<p>Find me in app/views/receivers/index.html.erb</p>
+<%= render 'users/header' %>
+
+<div class="container">
+	<div class="row">
+		<h3 class="receiver-title">配送先登録 / 一覧</h3>
+	</div>
+
+	<%= form_for [@user, @receiver] do |f| %>
+		<!-- エラーメッセージ表示-->
+		<% if @receiver.errors.any? %>
+			<div class="error-messages">
+				<% if @receiver.errors.count == 1 %>
+					<h4><%= @receiver.errors.count %> error prohibited this user from being saved:</h4>
+				<% else %>
+					<h4><%= @receiver.errors.count %> errors prohibited this user from being saved:</h4>
+				<% end %>
+				<ul class="error-reasons">
+					<% @receiver.errors.full_messages.each do |message| %>
+						<li><%= message %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+		<!-- エラーメッセージ表示-->
+
+		<div class="row">
+			<%= f.label :postal, "郵便番号(ハイフンなし)", class: 'col-md-2' %>
+			<%= f.text_field :postal, class: 'col-lg-2 panel panel-default receiver-form' %>
+		</div>
+
+		<div class="row">
+			<%= f.label :address, "住所", class: 'col-md-2' %>
+			<%= f.text_field :address, size: 50, class: 'col-md-5 panel panel-default receiver-form' %>
+		</div>
+
+		<div class="row">
+			<%= f.label :name, "宛名", class: 'col-md-2' %>
+			<%= f.text_field :name, class: 'col-md-2 panel panel-default receiver-form' %>
+		</div>
+
+		<div class="row">
+			<%= f.submit '登録する', class: 'btn btn-success active col-md-2 col-md-offset-7' %>
+		</div>
+	<% end %>
+
+	<div class="row">
+		<div class="col-md-10">
+			<table class="table table-bordered receiver-table">
+				<thead>
+					<tr>
+						<th class="col-md-1">郵便番号</th>
+						<th class="col-md-2">住所</th>
+						<th class="col-md-1">宛名</th>
+						<th class="col-md-2"></th>
+					</tr>
+				</thead>
+				<% @receivers.each do |receiver| %>
+				<tbody>
+					<tr>
+						<td class="col-md-1"><%= receiver.postal %></td>
+						<td class="col-md-2"><%= receiver.address %></td>
+						<td class="col-md-1"><%= receiver.name %></td>
+						<td class="col-md-2">
+							<%= link_to "編集する", edit_user_receiver_path(@user, receiver), class: 'btn btn-primary active receiver-btn' %>
+							<%= link_to "削除する", user_receiver_path(@user, receiver), method: :delete, class: 'btn btn-danger active receiver-btn', "data-confirm" => "本当に削除しますか？" %>
+						</td>
+					</tr>
+				</tbody>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>
