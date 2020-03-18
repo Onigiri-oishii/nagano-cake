@@ -26,7 +26,6 @@ class UsersController < ApplicationController
         render :edit
       end
     end 
-
   end
 
   def confirm
@@ -36,6 +35,5 @@ class UsersController < ApplicationController
   def user_params
   	params.require(:user).permit(:lastname, :firstname, :lastname_kana, :firstname_kana, :email, :postal, :address, :telephone, :password, :status)
   end
-
 end
 
