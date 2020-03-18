@@ -3,6 +3,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
   end
 
   def edit
@@ -10,4 +11,10 @@ class Admin::UsersController < ApplicationController
 
   def update
   end
+
+  private
+  def user_params
+    params.require(:user).permit(:lastname, :firstname, :lastname_kana, :firstname_kana, :email, :postal, :address, :telephone, :password, :status)
+  end
+
 end
