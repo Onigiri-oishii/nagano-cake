@@ -24,15 +24,14 @@ class UsersController < ApplicationController
       end
     else
       render :edit
-    end 
+    end
   end
 
   def confirm
   end
-end
-
 
   private
   def user_params
-  	params.require(:user).permit(:lastname, :ifirstname, :lastname_kana, :firstname_kana, :email, :postal, :address, :telephone, :password, :status)
+    params.require(:user).permit(:lastname, :ifirstname, :lastname_kana, :firstname_kana, :email, :postal, :address, :telephone, :password, :status)
   end
+end

@@ -1,2 +1,45 @@
-<h1>Receivers#edit</h1>
-<p>Find me in app/views/receivers/edit.html.erb</p>
+<%= render 'users/header' %>
+
+<div class="container">
+	<div class="row">
+		<h3 class="receiver-edit-title">配送先編集</h3>
+	</div>
+
+	<%= form_for [@user, @receiver] do |f| %>
+		<!-- エラーメッセージ表示-->
+		<% if @receiver.errors.any? %>
+			<div class="error-messages">
+				<% if @receiver.errors.count == 1 %>
+					<h4><%= @receiver.errors.count %> error prohibited this user from being saved:</h4>
+				<% else %>
+					<h4><%= @receiver.errors.count %> errors prohibited this user from being saved:</h4>
+				<% end %>
+				<ul class="error-reasons">
+					<% @receiver.errors.full_messages.each do |message| %>
+						<li><%= message %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+		<!-- エラーメッセージ表示-->
+
+		<div class="row">
+			<%= f.label :postal, "郵便番号(ハイフンなし)", class: 'col-md-2' %>
+			<%= f.text_field :postal, class: 'col-lg-2 panel panel-default receiver-form' %>
+		</div>
+
+		<div class="row">
+			<%= f.label :address, "住所", class: 'col-md-2' %>
+			<%= f.text_field :address, size: 50, class: 'col-md-5 panel panel-default receiver-form' %>
+		</div>
+
+		<div class="row">
+			<%= f.label :name, "宛名", class: 'col-md-2' %>
+			<%= f.text_field :name, class: 'col-md-2 panel panel-default receiver-form' %>
+		</div>
+
+		<div class="row">
+			<%= f.submit '編集する', class: 'btn btn-primary active col-md-2 col-md-offset-7' %>
+		</div>
+	<% end %>
+</div>
