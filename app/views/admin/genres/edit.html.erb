@@ -1,2 +1,20 @@
-<h1>Admin::Genres#edit</h1>
-<p>Find me in app/views/admin/genres/edit.html.erb</p>
+<%= render 'admin/home/header' %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+        	<br>
+        	<h3>ジャンル編集画面</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+        	<%= form_for(@genre) do |f| %>
+        		<%= f. :status %>
+        		<label><%= f.radio_button :genre, "true" %>有効</label>
+        		<label><%= f.radio_button :genre, "false" %>無効</label>
+        		<%= f.submit "変更を保存する" %>
+        	<% end %> -->
+        </div>
+    </div>
+</div>
