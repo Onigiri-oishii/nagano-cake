@@ -1,2 +1,103 @@
-<h1>Admin::Users#edit</h1>
-<p>Find me in app/views/admin/users/edit.html.erb</p>
+<%= render "admin/home/header" %>
+
+<div class="container">
+
+	<%= form_for @user,url: admin_user_path(@user.id) do |f| %>
+	<%= render "devise/shared/error_messages", resource: @user %>
+
+	<div class="row">
+		<div class="col-md-3">
+			<h3 class="admin-user-edit-title">会員編集画面</h3>
+		</div>
+	</div>
+
+	<div class="row admin-user-edit-row">
+		<div class="col-md-2 col-md-offset-1">
+			<p>会員ID</p>
+		</div>
+		<div class="col-md-1">
+			<p><%= @user.id %></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2 col-md-offset-1">
+			<p>氏名</p>
+		</div>
+		<div class="col-md-1">
+			<%= f.text_field :lastname, class: "panel panel-default" %>
+		</div>
+		<div class="col-md-1 col-md-offset-1">
+			<%= f.text_field :firstname, class: "panel panel-default" %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2 col-md-offset-1">
+			<p>フリガナ</p>
+		</div>
+		<div class="col-md-1">
+			<%= f.text_field :lastname_kana, class: "panel panel-default" %>
+		</div>
+		<div class="col-md-1 col-md-offset-1">
+			<%= f.text_field :firstname_kana, class: "panel panel-default" %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2 col-md-offset-1">
+			<p>郵便番号</p>
+		</div>
+		<div class="col-md-1">
+			<%= f.text_field :postal, class: "panel panel-default" %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2 col-md-offset-1">
+			<p>住所</p>
+		</div>
+		<div class="col-md-1">
+			<%= f.text_field :address, class: "panel panel-default" %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2 col-md-offset-1">
+			<p>電話番号</p>
+		</div>
+		<div class="col-md-1">
+			<%= f.text_field :telephone, class: "panel panel-default" %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2 col-md-offset-1">
+			<p>メールアドレス</p>
+		</div>
+		<div class="col-md-1">
+			<%= f.text_field :email, class: "panel panel-default" %>
+		</div>
+	</div>
+	<div class="row"><p> </p></div>	
+
+	<div class="row admin-user-edit-row">
+		<div class="col-md-2 col-md-offset-1">
+			<p>会員ステータス</p>
+		</div>
+		<div class="col-md-2">
+			<span><%= f.radio_button :status, true %>有効</span>
+			<span><%= f.radio_button :status, false %>退会済み</span>
+		</div>
+	</div>	
+
+	<%= f.hidden_field :password, value: :password %>
+	<div class="row admin-user-edit-row">
+		<div class="col-md-2 col-md-offset-1">
+			<%= f.submit "変更を保存する", class: "btn btn-primary" %>
+		</div>
+	</div>	
+
+	<% end %>
+
+</div>
