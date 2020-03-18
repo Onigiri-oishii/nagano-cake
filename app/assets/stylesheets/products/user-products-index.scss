@@ -5,16 +5,42 @@
 
     td{
       border:none;
+
+        .submit-bottan{
+          border: none;
+        }
+
     }
 
     .title{
       font-weight: bold;
+
+      .count{
+        font-weight: normal;
+      }
+
     }
 
-    .col-md-2{
-      background-color: #000;
-      height: 250px;
-      margin: 5px;
+    .item-box{
+      width: 100%;    
+
+      .item-box-sizing{
+        display: flex;
+        flex-wrap: wrap;
+
+        .item-box-image{
+          width: 100%;
+          height: 120px;
+        }
+      
+        .item-box-list{
+          width: 200px;
+          height: 250px;
+          margin: 5px;
+        }
+
+      }
+
     }
 
   }
