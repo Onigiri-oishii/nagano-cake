@@ -1,0 +1,41 @@
+#admin-products-index{
+  margin-top: 50px;
+
+  .top-box{
+    margin-bottom: 10px;
+    display: flex;
+  }
+
+  .title{
+    font-weight: bold;
+    margin-left: 20px;
+  }
+
+  p{
+    width: 30px;
+    height: 30px;
+    margin-left: 888px;
+    font-size: 300%;
+    background-color: #000;
+    text-align: center;
+  }
+
+  .table-box{
+    margin: 0 auto;
+    width: 90%;
+
+    .table-head{
+      height: 40px;
+      border-top: 1px solid #000;
+      border-bottom: 1px solid #000;
+      background-color: rgba(200,200,200,0.3);
+    }
+
+    .table-item{
+      height: 50px;
+      border-bottom: 1px solid #000;
+    }
+
+  }
+
+}
