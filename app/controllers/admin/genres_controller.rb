@@ -8,6 +8,7 @@ class Admin::GenresController < ApplicationController
   	if @genre = Genre.create(params_genre)
   		redirect_to admin_genres_path
   	else
+  		@genres = Genre.all
   		render "admin/genres/index"
   	end
   end
