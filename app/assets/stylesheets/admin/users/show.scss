@@ -1,0 +1,39 @@
+#admin-users-show{
+  margin-top: 50px;
+  margin-left: 100px;
+  margin-bottom: 200px;
+
+	.title{
+    font-weight: bold;
+  }
+
+  .text{
+    margin: 30px;
+
+    .status-label-true{
+      background-color: rgba(30,140,255,0.5);
+      border: solid;
+      border-radius: 5px;
+      border-width: thin;
+      padding:5px;
+    }
+
+    .status-label-false{
+      background-color: rgba(255,0,0,0.5);
+      border: solid;
+      border-radius: 5px;
+      border-width: thin;
+      padding:5px; 
+    }
+
+  }
+
+  .bottan-box{
+    margin-left: 43px; 
+
+      .orders-bottan{
+        margin-left: 50px;
+      }
+  }
+
+}

@@ -10,6 +10,6 @@
 		</div>
 		<br>
     		<%= link_to '退会しない',user_path(current_user), class: "btn-sm btn-primary"%>
-   			<%= link_to '退会する',user_path(current_user,status: false), method: :patch, class: "btn-sm btn-danger" %>
+   			<%= link_to '退会する',user_path(current_user.id, status: false), method: :patch, class: "btn-sm btn-danger" %>
 
 </div>
