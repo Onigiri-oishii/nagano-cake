@@ -1,2 +1,42 @@
-<h1>Products#index</h1>
-<p>Find me in app/views/products/index.html.erb</p>
+
+<%= render "users/header" %>
+
+<div class="container" id="user-products-index">
+
+  <div class="container main">
+    <div class="row">
+      <div class="col-md-3">
+      	<table class="table table-bordered">
+    			<th class="text-center">ジャンル検索</th>
+            <% @genres.each do |genres| %>
+      				<tr><td><% genres.name %></td></tr>
+            <% end %>
+  	    </table>
+      </div>
+      <div class="col-md-9">
+        <h3 class="title">商品一覧</h3>
+
+
+        <% @products.each do |products| %>
+
+          <%= products.name %>
+          <%= products.no_tax %>
+        <% end %>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+            </div>
+        </div>
+
+        
+      </div>
+    </div>
+  </div>
+</div>
