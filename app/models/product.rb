@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
 	has_many :order_products
 	has_many :cart_products, dependent: :destroy
-	belongs_to :genre
+	belongs_to :genre, optional: true 
 
 
 	validates :genres_id, presence: true
