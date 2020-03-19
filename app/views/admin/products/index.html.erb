@@ -34,8 +34,12 @@
                 <%= products.name %>
               <% end %>
             </td>
-            <td><%= products.no_tax %></td>
-            <td><%= products.genres.name %></td>
+            <td><%= products.no_tax.to_s(:delimited) %></td>
+            <% @genres.each do |genres| %>
+              <% if genres.id == products.genres_id %>
+              <td><%= genres.name %></td>
+              <% end %>
+            <% end %>
             <td>
               <% if products.sale_status == true %>
                 販売中
@@ -48,12 +52,9 @@
       </tbody>
     </table>
 
-<!-- 以下ページネーションの表示や動きは未確認。ページネーションのCSSもまだやってない。(cssファイルは/admin/products/index)　-->
-<!-- ここから　-->
-    <div class="">
+    <div class="paginate">
       <%= paginate @products %>
     </div>
-<!-- ここまで　-->
 
   </div>
 
