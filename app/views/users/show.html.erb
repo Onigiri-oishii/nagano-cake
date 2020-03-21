@@ -3,7 +3,7 @@
 <div class="container">
 	<div class="row">
 		<h3 class="mypage-title">マイページ</h3>
-		<div class="mypage-content col-md-9">
+		<div class="mypage-content col-md-7">
 			<h4 class="mypage-headline-4l">登録情報</h4>
 			<%= link_to "編集する", edit_user_path(current_user), class: 'btn btn-primary active' %>
 			<%= link_to "パスワードを変更する", edit_user_password_path, class: 'btn btn-primary active' %>
@@ -11,28 +11,28 @@
 			<table class="table table-bordered">
 				<tbody class="profile-list">
 					<tr>
-						<th class="profile-list-title active col-md-3">氏名</th>
-						<td class="col-md-9"><%= "#{current_user.lastname + "　" + current_user.firstname}" %></td>
+						<th class="profile-list-title active col-md-2">氏名</th>
+						<td class="col-md-7"><%= "#{current_user.lastname + "　" + current_user.firstname}" %></td>
 					</tr>
 					<tr>
-						<th class="profile-list-title active col-md-3">カナ</th>
-						<td class="col-md-9"><%= "#{current_user.lastname_kana + "　" + current_user.firstname_kana}" %></td>
+						<th class="profile-list-title active col-md-2">カナ</th>
+						<td class="col-md-7"><%= "#{current_user.lastname_kana + "　" + current_user.firstname_kana}" %></td>
 					</tr>
 					<tr>
-						<th class="profile-list-title active col-md-3">郵便番号</th>
-						<td class="col-md-9"><%= "#{current_user.postal}" %></td>
+						<th class="profile-list-title active col-md-2">郵便番号</th>
+						<td class="col-md-7"><%= "#{current_user.postal}" %></td>
 					</tr>
 					<tr>
-						<th class="profile-list-title active col-md-3">住所</th>
-						<td class="col-md-9"><%= "#{current_user.address}" %></td>
+						<th class="profile-list-title active col-md-2">住所</th>
+						<td class="col-md-7"><%= "#{current_user.address}" %></td>
 					</tr>
 					<tr>
-						<th class="profile-list-title active col-md-3">電話番号</th>
-						<td class="col-md-9"><%= "#{current_user.telephone}" %></td>
+						<th class="profile-list-title active col-md-2">電話番号</th>
+						<td class="col-md-7"><%= "#{current_user.telephone}" %></td>
 					</tr>
 					<tr>
-						<th class="profile-list-title active col-md-3">メールアドレス</th>
-						<td class="col-md-9"><%= "#{current_user.email}" %></td>
+						<th class="profile-list-title active col-md-2">メールアドレス</th>
+						<td class="col-md-7"><%= "#{current_user.email}" %></td>
 					</tr>
 				</tbody>
 			</table>
