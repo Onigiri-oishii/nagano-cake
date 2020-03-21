@@ -1,2 +1,64 @@
-<h1>Orders#new</h1>
-<p>Find me in app/views/orders/new.html.erb</p>
+<%= render "users/header" %>
+
+<div class="container">
+	<%= form_for [@user, @order],url: orders_path do |f| %>
+
+	    <div class="row">
+	        <div class="col-md-offset-1 col-md-2">
+	        	<h3 class="title-order-input">注文情報入力</h3>
+	        </div>
+	    </div>
+	    <div class="row">
+	        <div class="col-md-2"><strong>支払い方法</strong></div>
+	    </div>
+	    <div class="row">
+	        	<div class="col-md-2 col-md-offset-1">
+					<label><%= f.radio_button :way, 0 %>クレジットカード</label>
+	            	<label><%= f.radio_button :way, 1 %>銀行振込</label>
+	            </div>
+	    </div>
+
+
+	    <div class="row">
+	        <div class="col-md-2"><strong>お届け先</strong></div>
+	    </div>
+
+
+	    	<%= radio_button_tag :address1 %>
+	    		<p><%= @user.address %></p>
+	    		<%= hidden_field_tag = address1,@user.address + @user.name %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			    <div class="row">
+					<%= f.label :postal, "郵便番号(ハイフンなし)", class: 'col-md-2' %>
+					<%= f.text_field :postal, class: 'col-md-2 panel panel-default' %>
+				</div>
+
+				<div class="row">
+					<%= f.label :address, "住所", class: 'col-md-2' %>
+					<%= f.text_field :address, size: 50, class: 'col-md-5 panel panel-default order-form' %>
+				</div>
+
+				<div class="row">
+					<%= f.label :name, "宛名", class: 'col-md-2' %>
+					<%= f.text_field :name, class: 'col-md-2 panel panel-default order-form' %>
+				</div>
+
+				<div class="row">
+					<%= f.submit '確認画面へ進む', class: 'btn btn-primary active col-md-2 col-md-offset-5' %>
+				</div>
+
+	<% end %>
+</div>
