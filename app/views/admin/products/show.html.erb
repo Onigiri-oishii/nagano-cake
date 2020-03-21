@@ -1,2 +1,63 @@
-<h1>Admin::Products#show</h1>
-<p>Find me in app/views/admin/products/show.html.erb</p>
+<%= render "admin/home/header" %>
+
+<div class="container">
+	<div class="row">
+		<h3 class="col-md-4 admin-product-show-title">商品 詳細画面</h3>
+	</div>
+
+	<div class="row">
+
+		<!--「商品画像」-->
+		<div class="col-md-4">
+			<div class="col-md-10 col-md-offset-1">
+				<%= attachment_image_tag @product, :image, :fill, 200,200 %>
+			</div>
+		</div>
+
+		<!--商品情報-->
+		<div class="col-md-5">
+			<div class="row admin-product-show-item">
+				<p class="col-md-4">商品名</p>
+				<p class="col-md-8"><%= @product.name %></p>
+			</div>
+
+			<div class="row admin-product-show-item">
+				<p class="col-md-4">商品説明</p>
+				<div class="col-md-8">
+					<p><%= @product.introduction %></p>
+				</div>
+			</div>
+
+			<div class="row admin-product-show-item">
+				<p class="col-md-4">ジャンル</p>
+				<% @genres.each do |g| %>
+					<% if g.id == @product.genres_id %>
+						<p class="col-md-8"><%= g.name %></p> 
+					<% end %>
+				<% end %>
+			</div>
+
+			<div class="row admin-product-show-item">
+				<p class="col-md-4">税込価格(税抜価格)</p>
+				<p class="col-md-8"><%= number_to_currency(@product.no_tax * 1.1,unit: "", precision: 0) %>(<%= number_to_currency(@product.no_tax, unit: "", precision: 0) %>)円</p>
+			</div>
+
+			<div class="row admin-product-show-item">
+				<p class="col-md-4">販売<br>ステータス</p>
+				<% if @product.sale_status == true %>
+					<p class="col-md-8">販売中</p>
+				<% else %>
+					<p class="col-md-8">売切れ</p>
+				<% end %>
+			</div>
+
+		</div>
+
+		<!--編集ボタン	-->
+		<div class="col-md-2">
+			<%= link_to "編集する", edit_admin_product_path(@product.id),class: "btn btn-primary admin-product-show-btn" %>
+		</div>
+
+	</div> <!--row-->
+
+</div>
