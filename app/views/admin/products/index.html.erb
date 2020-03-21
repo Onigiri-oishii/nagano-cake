@@ -2,11 +2,15 @@
 <%= render 'admin/home/header' %>
 
 <div class="container" id="admin-products-index">
+
   <div class="top-box">
     <h3 class="title">商品一覧画面</h3>
 
-    <p><%= link_to "+", new_admin_product_path %></p>
-
+    <div class="link-bottan">
+      <%= link_to new_admin_product_path do %>
+        <%= image_tag "icons.png" %>
+      <% end %>
+    </div>
   </div>
 
   <div class="container">
@@ -22,32 +26,37 @@
       	</tr>
       </thead>
       <tbody>
-      	<tr class="table-item">
-      		<td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>          
-      	</tr>
-
-        <tr class="table-item">
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>          
-        </tr>
-        <tr class="table-item">
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>
-          <td>a</td>          
-        </tr>
-
+        <% @products.each do |products| %>
+        	<tr class="table-item">
+        		<td><%= products.id %></td>
+            <td>
+              <%= link_to admin_product_path(products) do %>
+                <%= products.name %>
+              <% end %>
+            </td>
+            <td><%= products.no_tax.to_s(:delimited) %></td>
+            <% @genres.each do |genres| %>
+              <% if genres.id == products.genres_id %>
+              <td><%= genres.name %></td>
+              <% end %>
+            <% end %>
+            <td>
+              <% if products.sale_status == true %>
+                販売中
+              <% else %>
+                販売停止中
+              <% end %>
+            </td>          
+        	</tr>
+        <% end %>
       </tbody>
     </table>
 
+    <div class="paginate">
+      <%= paginate @products %>
+    </div>
+
   </div>
+
 </div>
 

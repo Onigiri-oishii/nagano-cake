@@ -1,2 +1,40 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<%= render 'users/header' %>
+
+<div class="container">
+<div class="row">
+  	<div class="col-md-3">
+        <table class="genres-table">
+     		<tr>
+     			<th class="genre-title">ジャンル検索</th>
+     		</tr>
+     		<% @genres.each do |genre| %>
+            <%= form_with(scope: :search, url: products_path, method: :get, local: true) do |f| %>
+                <%= f.hidden_field :genres_id, :value => genre.id %>
+         		<tr>
+                    <td class="genre-content"><%= f.submit "#{genre.name}", style: "border: none" %></td>
+                </tr>
+            <% end%>
+     		<% end %>
+		</table>
+    </div>
+    <div class="col-md-8 col-md-offset-1 product-info">
+   	    <div class="row">
+		<%= attachment_image_tag @product, :image, :fill, 300, 200, fallback: "comming_soon.jpg", class: 'col-md-3' %>
+		<div class="col-md-4">
+			<h3 class="product-title"><%= @product.name %></h3>
+			<p class="product-text"><%= @product.introduction %></p>
+			<h3 class="product-price-with-tax"><%= "¥ " + "#{include_tax(@product.no_tax)}" + " (税込)" %></h3>
+		</div>
+   	    </div>
+    	<div class="row">
+    		<div class="col-md-5 col-md-offset-7">
+                <%= form_for [@user, @cart_product] do |f| %>
+                <%= f.select :number, [[1, 1],[2, 2],[3, 3],[4, 4],[5, 5],[6, 6],[7, 7],[8, 8],[9, 9],[10, 10]] %>
+                    <%= f.hidden_field :product_id, :value => @product.id %>
+                    <%= f.submit "カートに入れる", class: 'btn btn-primary active' %>
+                <% end %>
+    		</div>
+    	</div>
+    </div>
+</div>
+</div>

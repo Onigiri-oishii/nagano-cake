@@ -1,0 +1,27 @@
+.genres-table {
+	border: 1px solid gray;
+	width: 200px;
+	margin-top: 30px;
+}
+
+.genre-title {
+	text-align: center;
+	font-size: 18px;
+	border-bottom: 1px solid gray;
+}
+
+.genre-content {
+	line-height: 30px;
+	font-size: 20px;
+	color: gray;
+	padding: 10px 5px;
+}
+
+.product-info {
+	margin-top: 30px;
+}
+
+select {
+	width: 45px;
+	height: 35px;
+}

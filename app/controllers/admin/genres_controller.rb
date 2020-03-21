@@ -5,9 +5,10 @@ class Admin::GenresController < ApplicationController
   end
 
   def create
-  	if @genre = Genre.create(params_genre)
+  	if Genre.create(params_genre)
   		redirect_to admin_genres_path
   	else
+  		@genre = Genre.new
   		@genres = Genre.all
   		render "admin/genres/index"
   	end
@@ -28,7 +29,7 @@ class Admin::GenresController < ApplicationController
 
   private
   def params_genre
-  	params.require(:genre).permit(:name, :status)
+    params.require(:genre).permit(:name, :status)
   end
 
 end

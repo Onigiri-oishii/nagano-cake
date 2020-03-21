@@ -4,6 +4,7 @@
   .top-box{
     margin-bottom: 10px;
     display: flex;
+    position: relative;
   }
 
   .title{
@@ -11,13 +12,10 @@
     margin-left: 20px;
   }
 
-  p{
-    width: 30px;
-    height: 30px;
-    margin-left: 888px;
-    font-size: 300%;
-    background-color: #000;
-    text-align: center;
+  .link-bottan{
+    position: absolute;
+    left: 90%;
+    top: 10%;
   }
 
   .table-box{
@@ -34,6 +32,10 @@
     .table-item{
       height: 50px;
       border-bottom: 1px solid #000;
+    }
+
+    .paginate{
+      text-align: center;
     }
 
   }
