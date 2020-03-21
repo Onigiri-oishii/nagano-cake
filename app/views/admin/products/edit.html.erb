@@ -11,8 +11,8 @@
 		<!--「商品画像」と「画像選択ボタン」-->
 		<div class="col-md-4">
 			<div class="col-md-10 col-md-offset-1">
-				<%= attachment_image_tag @product, :image, :fill, 200,200 %>
-				<%= f.attachment_field :image, direct: true, class: "edit-attachment" %>
+				<%= attachment_image_tag @product, :image, :fill, 200,200, id: "attachment-image" %>
+				<%= f.attachment_field :image, direct: true, class: "edit-attachment",id: "click-attachment" %>
 			</div>
 		</div>
 
