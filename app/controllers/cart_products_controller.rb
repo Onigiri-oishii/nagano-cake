@@ -21,7 +21,7 @@ class CartProductsController < ApplicationController
 
   def destroy_all
     @cart_products = current_user.cart_products.all
-    @cart_products.destroy
+    @cart_products.destroy_all
     redirect_to user_cart_products_path
   end
 
