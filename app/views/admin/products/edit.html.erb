@@ -1,2 +1,67 @@
-<h1>Admin::Products#edit</h1>
-<p>Find me in app/views/admin/products/edit.html.erb</p>
+<%= render "admin/home/header" %>
+
+<div class="container" id="admin-product-edit">
+	<div class="row">
+		<h3 class="col-md-4">商品 編集画面</h3>
+	</div>
+
+	<%= form_for @product,url: admin_product_path(@product.id) do |f| %>
+	<div class="row">
+
+		<!--「商品画像」と「画像選択ボタン」-->
+		<div class="col-md-4">
+			<div class="col-md-10 col-md-offset-1">
+				<%= attachment_image_tag @product, :image, :fill, 200,200 %>
+				<%= f.attachment_field :image, direct: true, class: "edit-attachment" %>
+			</div>
+		</div>
+
+		<!--商品情報入力欄-->
+		<div class="col-md-5">
+
+			<div class="row">
+				<p class="col-md-3">商品名</p>
+				<div class="col-md-6">
+					<%= f.text_field :name, class: "panel panel-default edit-form" %>
+				</div>
+			</div>
+
+			<div class="row">
+				<p class="col-md-3">商品説明</p>
+				<div class="col-md-6">
+					<%= f.text_area :introduction, class: "edit-form edit-introduction panel panel-default" %>
+				</div>
+			</div>
+
+			<div class="row edit-genre">
+				<p class="col-md-3">ジャンル</p>
+				<div class="col-md-6">
+					<%= f.collection_select :genres_id, Genre.all, :id, :name,{}, class: "form-control" %>
+				</div>
+			</div>
+
+			<div class="row">
+				<p class="col-md-3">税抜価格</p>
+				<div class="col-md-6">
+					<%= f.text_field :no_tax, class: "panel panel-default edit-form" %>
+				</div>
+			</div>
+
+			<div class="row">
+				<p class="col-md-3">販売<br>ステータス</p>
+				<div class="col-md-6">
+					<%= f.select :sale_status,[["販売中", true], ["売切れ", false]],{}, class: "form-control" %>
+				</div>
+			</div>
+
+		</div>
+
+		<!--変更を保存ボタン-->
+		<div class="col-md-2">
+			<%= f.submit "変更を保存",class: "btn btn-primary edit-submit" %>
+		</div>
+
+	</div> <!--row-->
+	<% end %>
+
+</div>
