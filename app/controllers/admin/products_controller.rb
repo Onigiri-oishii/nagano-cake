@@ -19,6 +19,8 @@ class Admin::ProductsController < ApplicationController
   end
 
   def show
+    @product = Product.find(params[:id])
+    @genres = Genre.all
   end
 
   def edit
@@ -29,7 +31,7 @@ class Admin::ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:name, :introduction, :genres_id, :no_tax, :sale_status)
+    params.require(:product).permit(:name, :introduction, :genres_id, :no_tax, :sale_status, :image)
   end
 
 
