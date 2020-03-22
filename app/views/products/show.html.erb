@@ -19,7 +19,7 @@
     </div>
     <div class="col-md-8 col-md-offset-1 product-info">
    	    <div class="row">
-		<%= attachment_image_tag @product, :image, :fill, 300, 200, fallback: "comming_soon.jpg", class: 'col-md-3' %>
+		<%= attachment_image_tag @product, :image, :fill, size: "300x200", fallback: "noimage.jpg", class: 'col-md-3' %>
 		<div class="col-md-4">
 			<h3 class="product-title"><%= @product.name %></h3>
 			<p class="product-text"><%= @product.introduction %></p>

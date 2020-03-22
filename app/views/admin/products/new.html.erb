@@ -21,27 +21,37 @@
 		<div class="col-md-5">
 			<div class="row">
 				<p class="col-md-3">商品名</p>
-				<%= f.text_field :name, class: "col-md-6 panel panel-default" %>
+				<div class="col-md-9">
+					<%= f.text_field :name, class: "panel panel-default admin-product-new-form" %>
+				</div>
 			</div>
 
 			<div class="row">
 				<p class="col-md-3">商品説明</p>
-				<%= f.text_field :introduction, class: "col-md-6 admin-products-new-introduction panel panel-default" %>
+				<div class="col-md-9">
+					<%= f.text_area :introduction, class: " admin-product-new-introduction admin-product-new-form panel panel-default" %>
+				</div>
 			</div>
 
-			<div class="row">
+			<div class="row admin-product-new-genre">
 				<p class="col-md-3">ジャンル</p>
-				<%= f.collection_select :genres_id, Genre.all, :id, :name, class: "col-md-6" %>
+				<div class="col-md-6">
+					<%= f.collection_select :genres_id, Genre.all, :id, :name,{}, class: "form-control" %>
+				</div>
 			</div>
 
 			<div class="row">
 				<p class="col-md-3">税抜価格</p>
-				<%= f.text_field :no_tax, class: "col-md-6 panel panel-default" %>
+				<div class="col-md-9">
+					<%= f.text_field :no_tax, class: "panel panel-default admin-product-new-form" %>
+				</div>
 			</div>
 
 			<div class="row">
 				<p class="col-md-3">販売<br>ステータス</p>
-				<%= f.select :sale_status,[["販売中", true], ["売切れ", false]], class: "col-md-6" %>
+				<div class="col-md-6">
+					<%= f.select :sale_status,[["販売中", true], ["売切れ", false]],{},class: "form-control"%>
+				</div>
 			</div>
 		</div>
 
