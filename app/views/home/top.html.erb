@@ -4,33 +4,52 @@
     <div class="row">
         <div class="col-md-3">
         	<table class="table table-bordered">
-					<th class="text-center">ジャンル検索</th>
-						<tr><td>ケーキ<br><br>
-						焼き菓子<br><br>
-						プリン<br><br>
-						キャンディ</td></tr><br>
+                    <th class="text-center">ジャンル検索</th>
+                <% @genres.each do |genre| %>
+                    <%= form_with(scope: :search, url: products_path, method: :get, local: true) do |f| %>
+                        <%= f.hidden_field :genres_id, :value => genre.id %>
+                        <tr>
+                            <td class="genre-content"><%= f.submit "#{genre.name}", style: "border: none" %></td>
+                        </tr>
+                    <% end%>
+                <% end %>
 			</table>
         </div>
-        <div class="col-md-8 col-md^offset-8 text-center">
-        	<h4>ようこそ、NaganoCakeへ！<br>
-        		このサイトは、ケーキ販売のECサイトになります。<br>
-        		会員でない方も商品の閲覧はできますが、<br>
-        		購入には会員登録が必要になります。
-        		</h4>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="main-visual", style="padding-left: 35px">
+                        <div class="col-md-10">
+                            <h4 class="main-text">
+                                ようこそ、NaganoCakeへ！<br>
+                                このサイトは、ケーキ販売のECサイトになります。<br>
+                                会員でない方も商品の閲覧はできますが、<br>
+                                購入には会員登録が必要になります。
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9", style="padding-left: 25px">
+                        <h3>オススメ商品</h3>
+                        <table>
+                    	<tr>
+                            <% @random.each do |product| %>
+                            <td style="padding-right: 15px">
+                                <%= link_to (product) do %>
+                                    <%= attachment_image_tag product, :image, :fill, 200,200 %><br>
+                                <% end %>
+                                <%= product.name %><br>
+                                ¥<%= product.no_tax %><br>
+                            </td>
+                            <% end %>
+                        </tr>
+                        </table>
+                    </div>
+                </div>
+                	<div class="col-md-2 col-md-offset-11">
+                        <%= link_to "もっと見る>", products_path %>
+                    </div>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-offset-3 col-md-6">
-        	<h2>オススメ商品</h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-offset-3 col-md-2">商品名<br>¥0,000</div>
-        <div class="col-md-2">商品名<br>¥0,000</div>
-        <div class="col-md-2">商品名<br>¥0,000</div>
-        <div class="col-md-2">商品名<br>¥0,000</div>
-    </div>
-    <div class="row">
-    	<div class="col-md-10 col-md-offset-10">もっと見る></div>
     </div>
 </div>
