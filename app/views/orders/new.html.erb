@@ -1,2 +1,107 @@
-<h1>Orders#new</h1>
-<p>Find me in app/views/orders/new.html.erb</p>
+<%= render "users/header" %>
+
+<%= form_for @order, url: orders_confirm_path, method: :get do |f|%>
+<div class="container">
+	<div class="row">
+		<div class="col-md-2 col-md-offset-1">
+			<h3 style="background-color:rgba(200,200,200,0.5);text-align:center">注文情報入力</h3>			
+		</div>
+	</div>
+
+	<!--支払い方法-->
+	<div class="row">
+		<div class="col-md-2">
+			<h4>支払い方法</h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2 col-md-offset-1">
+			<%= f.radio_button :way, :クレジットカード, checked: true %>
+			<%= f.label "クレジットカード" %>
+			<br>
+			<%= f.radio_button :way, :銀行振込 %>
+			<%= f.label "銀行振込" %>
+		</div>
+	</div>
+
+	<!--お届け先-->
+	<div class="row">
+		<div class="col-md-2">
+			<h4>お届け先</h4>
+		</div>
+	</div>
+
+	<!--radio_button1-->
+	<div class="row">
+		<div class="col-md-9 col-md-offset-1">
+			<%= radio_button_tag :receiver_type, 1, true %>
+			<%= label_tag "ご自身の住所" %><br>
+			<p><%= @user.postal + @user.address %></p>
+			<p><%= @user.lastname + @user.firstname %></p>
+			<%= hidden_field_tag :postal1, @user.postal %>
+			<%= hidden_field_tag :address1, @user.address %>
+			<%= hidden_field_tag :name1, @user.lastname + @user.firstname %>
+			<%= hidden_field_tag :telephone1, @user.telephone %>
+		</div>
+	</div>
+
+	<!--radio_button2-->
+	<div class="row">
+		<div class="col-md-9 col-md-offset-1">
+			<%= radio_button_tag :receiver_type, 2, false %>
+			<%= label_tag "登録済住所から選択" %><br>
+			<div class="row">
+				<div class="col-md-6">
+					<select id = "full_address_id" name="full_address_id" style="width:100%;">
+						<%= @receiver.each do |r| %>
+						<option value="<%= r.id %>"><%= r.postal + " " + r.address + " " +r.name %></option>
+						<% end %>
+					</select>			
+					<%= hidden_field_tag :telephone2, @user.telephone %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--radio_button3-->
+	<div class="row">
+		<div class="col-md-9 col-md-offset-1">
+			<%= radio_button_tag :receiver_type, 3, false %>
+			<%= label_tag "新しいお届け先" %><br>
+			<div class="row">
+				<div class="col-md-3">
+					<span>郵便番号(ハイフンなし)</span>
+				</div>
+				<div class="col-md-6">
+					<%= text_field_tag :postal3 %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<span>住所</span>
+				</div>
+				<div class="col-md-6">
+					<%= text_field_tag :address3 %>
+				</div>
+			</div>
+			<div class="row">				
+				<div class="col-md-3">
+					<span>宛名</span>
+				</div>
+				<div class="col-md-6">
+					<%= text_field_tag :name3 %>
+				</div>
+			</div>
+			<%= hidden_field_tag :telephone3, @user.telephone %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2 col-md-offset-5">
+			<%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
+		</div>
+	</div>
+
+
+</div>
+<% end %>
