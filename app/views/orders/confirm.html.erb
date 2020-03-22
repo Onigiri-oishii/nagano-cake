@@ -1,2 +1,88 @@
-<h1>Orders#confirm</h1>
-<p>Find me in app/views/orders/confirm.html.erb</p>
+<%= render 'users/header' %>
+
+<div class="container">
+	<div class="row">
+		<h3 class="col-md-offset-1 col-md-3 orders-confirm-title">注文情報確認</h3>
+	</div>
+	<%= form_for(@order) do |f| %>
+	<%= f.fields_for :order_products do |i| %>
+	<div class="row">
+		<div class="col-md-8">
+			<table class="table table-bordered">
+				<thead class="orders-list-title">
+					<tr>
+						<th class="col-md-2">商品名</th>
+						<th class="col-md-1">単価(税込)</th>
+						<th class="col-md-1">数量</th>
+						<th class="col-md-1">小計</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% total = 0 %>
+					<% @cart_products.each do |cart_product| %>
+					<tr>
+						<td>
+							<%= attachment_image_tag cart_product.product, :image, :fill, size: "50x40", fallback: "noimage.jpg" %>
+							<%= cart_product.product.name %>
+						</td>
+						<td>
+							<%= include_tax(cart_product.product.no_tax) %>
+							<%= i.hidden_field :price, :value => (cart_product.product.no_tax * 1.1).floor %>
+						</td>
+						<td>
+							<%= cart_product.number %>
+							<%= i.hidden_field :number, :value => cart_product.number %>
+						</td>
+						<td><%= get_subtotal(cart_product.product.no_tax, cart_product.number) %></td>
+							<%= i.hidden_field :production_status, :value => "着手不可" %>
+					</tr>
+					<% total += total_price(cart_product.product.no_tax, cart_product.number) %>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-3">
+			<table class="table table-bordered">
+				<tr>
+					<th class="orders-list-title">送料</th>
+					<td>800<%= f.hidden_field :fee, :value => 800 %></td>
+				</tr>
+				<tr>
+					<th class="orders-list-title">商品合計</th>
+					<td>
+						<%= total.to_s(:delimited, delimiter: ',') %>
+						<%= f.hidden_field :total_products, :value => total.to_i %>
+					</td>
+				</tr>
+				<tr>
+					<th class="orders-list-title">請求金額</th>
+					<td>
+						<%= (total + 800).to_s(:delimited, delimiter: ',') %>
+						<%= f.hidden_field :total_pay, :value => (total + 800).to_i %>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<h4 class="orders-detail-title">支払方法</h4>
+		<h4>
+			<%=  %>
+			<%=  %>
+		</h4>
+	</div>
+	<div class="row">
+		<h4 class="orders-detail-title">お届け先</h4>
+		<h4>
+			<%=  %>
+			<%=  %>
+		</h4>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-4 col-md-4 create-order-link">
+			<%= f.submit "購入を確定する", class: 'btn btn-success btn-lg active col-md-10' %>
+		</div>
+	</div>
+	<% end %>
+	<% end %>
+</div>
