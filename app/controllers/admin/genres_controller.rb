@@ -19,7 +19,7 @@ class Admin::GenresController < ApplicationController
   end
 
   def update
-      @genre = Genre.find(params[:id])
+    @genre = Genre.find(params[:id])
     if @genre.update(params_genre)
       redirect_to admin_genres_path
     else
