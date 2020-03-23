@@ -1,2 +1,116 @@
-<h1>Admin::Orders#show</h1>
-<p>Find me in app/views/admin/orders/show.html.erb</p>
+
+
+<%= render "admin/home/header" %>
+<% total_price_var = 0 %>
+
+<div class="container" id="admin-order-show">
+	<div class="row">
+		<div class="col-md-2 col-md-offset-1">
+			<h3>注文履歴詳細</h3>
+		</div>
+	</div>
+
+	<!----------------------order情報---------------------->
+	<div class="row">
+		<div class="col-md-2">
+			<p><b>購入者</b></p>
+		</div>
+		<div class="col-md-9">
+			<p><%= link_to "#{User.find(@order.user_id).lastname}#{User.find(@order.user_id).firstname}", admin_user_path(@order.user_id) %></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2">
+			<p><b>配送先</b></p>
+		</div>
+		<div class="col-md-9">
+			<p><%= @order.postal %><%= @order.address %><br><%= @order.name %></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2">
+			<p><b>支払い方法</b></p>
+		</div>
+		<div class="col-md-9">
+			<p><%= @order.way %></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2">
+			<p><b>注文ステータス</b></p>
+		</div>
+		<%= form_tag admin_order_path(@order.id,switch_status: 1), method: :patch do %>
+		<div class="col-md-2">
+			<p><%= select_tag :send_order_status, options_for_select([["入金待ち",:入金待ち],["入金確認",:入金確認],["製作中",:製作中],["発送準備中",:発送準備中],["発送済み",:発送済み]],@order.order_status),style: "width:100%" %></p>
+		</div>
+		<div class="col-md-1">
+			<%= submit_tag "更新", class: "btn btn-primary" %>
+		</div>
+		<% end %>
+	</div>
+
+	<div class="row">
+	<!----------------------order_product情報---------------------->
+		<div class="col-md-9">
+			<table class="table table-bordered" style="width:100%;">
+				<tr>
+					<th>商品名</th>
+					<th>単価	(税込)</th>
+					<th>数量</th>
+					<th>小計</th>
+					<th>製作ステータス</th>
+					<th></th>
+				</tr>
+
+				<% @order_products.each do |o| %>
+				<tr>
+					<td><%= o.product.name %></td>
+					<td><%= include_tax(o.price) %></td>
+					<td><%= o.number %></td>
+					<td><%= include_tax(o.price * o.number) %></td>
+					<% total_price_var = o.price * o.number * 1.1 %>
+					<%= form_tag admin_order_path(@order.id,switch_status: 2,send_production_id: o.id), method: :patch do %>
+					<td>
+						<%= select_tag :send_production_status, options_for_select([["着手不可",:着手不可],["製作待ち",:製作待ち],["製作中",:製作中],["製作完了",:製作完了]],o.production_status),style: "width:100%" %>
+					</td>
+
+						<td style="text-align:center"><%= submit_tag "更新", class: "btn btn-primary" %></td>
+					<% end %>
+				</tr>
+				<% end %>
+			</table>
+		</div>
+
+	<!----------------------請求金額---------------------->
+		<div class="col-md-3">
+			<div class="row">
+				<div class="col-md-6">
+					<p><b>商品合計</b></p>
+				</div>
+				<div class="col-md-6">
+					<p><%= total_price_var.floor.to_s(:delimited, delimiter: ',') %></p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<p><b>送料</b></p>
+				</div>
+				<div class="col-md-6">
+					<p><%= @order.fee %></p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<p><b>請求金額合計</b></p>
+				</div>
+				<div class="col-md-6">
+					<p><b><%= (total_price_var+@order.fee).floor.to_s(:delimited, delimiter: ',') %></b></p>
+				</div>
+			</div>
+		</div>
+
+	</div> <!--row-->
+</div>
