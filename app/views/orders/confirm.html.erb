@@ -5,7 +5,7 @@
 		<h3 class="col-md-offset-1 col-md-3 orders-confirm-title">注文情報確認</h3>
 	</div>
 	<%= form_for(@order) do |f| %>
-	<%= f.fields_for :order_products do |i| %>
+	<%= f.fields_for :order_products, @order.order_products.build do |op| %>
 	<div class="row">
 		<div class="col-md-8">
 			<table class="table table-bordered">
@@ -27,14 +27,15 @@
 						</td>
 						<td>
 							<%= include_tax(cart_product.product.no_tax) %>
-							<%= i.hidden_field :price, :value => (cart_product.product.no_tax * 1.1).floor %>
+							<%= op.hidden_field :price, :value => (cart_product.product.no_tax * 1.1).floor.to_i %>
 						</td>
 						<td>
 							<%= cart_product.number %>
-							<%= i.hidden_field :number, :value => cart_product.number %>
+							<%= op.hidden_field :number, :value => cart_product.number.to_i %>
 						</td>
 						<td><%= get_subtotal(cart_product.product.no_tax, cart_product.number) %></td>
-							<%= i.hidden_field :production_status, :value => "着手不可" %>
+							<%= op.hidden_field :production_status, :value => "着手不可" %>
+							<%= op.hidden_field :product_id, :value => cart_product.product_id %>
 					</tr>
 					<% total += total_price(cart_product.product.no_tax, cart_product.number) %>
 					<% end %>
@@ -65,17 +66,21 @@
 		</div>
 	</div>
 	<div class="row">
-		<h4 class="orders-detail-title">支払方法</h4>
-		<h4>
-			<%=  %>
-			<%=  %>
+		<h4 class="orders-detail-title col-md-2">支払方法</h4>
+		<h4 style="padding-top: 10px;">
+			<%= @order.way %>
+			<%= f.hidden_field :way, :value => @order.way %>
 		</h4>
 	</div>
 	<div class="row">
-		<h4 class="orders-detail-title">お届け先</h4>
+		<h4 class="orders-detail-title col-md-2">お届け先</h4>
 		<h4>
-			<%=  %>
-			<%=  %>
+			<%= @order.postal + "　" + @order.address %><br>
+			<%= @order.name %>
+			<%= f.hidden_field :postal, :value => @order.postal %>
+			<%= f.hidden_field :address, :value => @order.address %>
+			<%= f.hidden_field :name, :value => @order.name %>
+			<%= f.hidden_field :telephone, :value => @order.telephone %>
 		</h4>
 	</div>
 	<div class="row">
