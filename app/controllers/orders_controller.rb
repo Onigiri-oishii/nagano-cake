@@ -6,8 +6,12 @@ class OrdersController < ApplicationController
   end
 
   def confirm
-    @order = Order.new(order_params) #way(入金方法)をviewから受け取り
-    @order.user_id = current_user.id
+    @order = current_user.orders.new
+    @order.order_products.build
+
+    @order.way = params[:way] #way(入金方法)をviewから受け取り
+    #--------ユーザのカート内商品を@cart_productに格納--------
+    @cart_products = current_user.cart_products.all
 
     #--------radio_buttonの選択に応じた住所を登録する--------
     selected_address = "" #変数宣言：orderに格納する住所
@@ -31,30 +35,13 @@ class OrdersController < ApplicationController
     else #例外処理
       redirect_to new_order_path
     end
-
-    #--------ユーザのカート内商品を@cart_productに格納--------
-    @cart_products = CartProduct.where(user_id: current_user.id) 
-
-    #--------total_products(商品合計金額)を求める--------
-    total_pr = 0
-    @cart_products.each do |c|
-      total_pr = total_pr + Product.find(c.product_id).no_tax * c.number * 1.1
-    end
-    @order.total_products = total_pr
-
-    #--------otal_pay(支払合計金額)を求める--------
-    @order.total_pay = @order.total_products + 800
-
-    @order.order_products.build
-
   end
 
   def create
     @cart_products = current_user.cart_products.all
-    @order = Order.new(order_params)
-    @order.user_id = current_user.id
+    @order = current_user.orders.new(order_params)
     if @order.save
-      @cart_products.detroy_all
+      @cart_products.destroy_all
       redirect_to orders_thanks_path
     end
   end
@@ -70,6 +57,6 @@ class OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:fee, :total_products, :total_pay, :address, :postal, :telephone, :name, :way, order_products_attributes: [:production_status, :number, :price])
+    params.require(:order).permit(:fee, :total_products, :total_pay, :address, :postal, :telephone, :name, :way, order_products_attributes: [:product_id, :production_status, :number, :price])
   end
 end
