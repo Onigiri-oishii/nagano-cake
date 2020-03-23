@@ -1,7 +1,11 @@
 class ProductsController < ApplicationController
   def index
     @genres = Genre.all
-    @products = Product.where(products_search_params)
+    if params[:search]
+      @products = Product.where(products_search_params).page(params[:page]).per(6)
+    else
+      @products = Product.all.page(params[:page]).per(6)
+    end
   end
 
   def show

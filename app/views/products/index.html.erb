@@ -6,37 +6,36 @@
   <div class="container main">
     <div class="row">
       <div class="col-md-3">
-      	<table class="table table-bordered">
-    			<th class="text-center">ジャンル検索</th>
-            <% @genres.each do |genres| %>
-      				<tr><td><% genres.name %></td></tr>
-            <% end %>
-  	    </table>
+        <table class="table table-bordered">
+          <th class="text-center">ジャンル検索</th>
+          <% @genres.each do |genre| %>
+            <%= form_with(scope: :search, url: products_path, method: :get, local: true) do |f| %>
+            <%= f.hidden_field :genres_id, :value => genre.id %>
+            <tr><td><%= f.submit genre.name, class: "submit-bottan" %></td></tr>
+          <% end %>
+          <% end %>
+        </table>
       </div>
       <div class="col-md-9">
-        <h3 class="title">商品一覧</h3>
-
-
-        <% @products.each do |products| %>
-
-          <%= products.name %>
-          <%= products.no_tax %>
-        <% end %>
-
-        <div class="container">
-          <div class="row">
-            <div class="col-md-2">
+        <h3 class="title">商品一覧<span class="count">(全<%= @products.count %>件)</span></h3>
+        <div class="container item-box">
+          <div class="row item-box-sizing">
+          <% @products.each do |product| %>
+            <div class="item-box-list">
+                <%= attachment_image_tag product, :image_id, format: 'jpeg', fallback: "noimage.jpg", class:"item-box-image" %>
+                <%= link_to product_path(product) do %>
+                <%= product.name %><br>
+              <% end %>
+              ¥<%= product.no_tax.to_s(:delimited) %>
             </div>
-            <div class="col-md-2">
-            </div>
-            <div class="col-md-2">
-            </div>
-            <div class="col-md-2">
-            </div>
+          <% end %>
+          </div>
+
+        <div class="paginate">
+          <%= paginate @products %>
         </div>
-
-        
       </div>
     </div>
   </div>
 </div>
+
