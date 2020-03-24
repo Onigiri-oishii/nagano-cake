@@ -1,0 +1,27 @@
+#admin-header{
+  margin: 0 0 100px 0;
+  width: 100%;
+  height: 210px;
+  border-bottom: 1px solid #000;
+
+  .header-logo{
+  	background-image: url(../../logo.png); 
+    background-position: center center;
+    width: 200px;
+    height: 200px;  
+  }
+
+  .nav-item-box{
+    margin-top: 50px;
+  }
+
+  .header-link {
+  	margin-top: 10px;
+  	margin-right: 40px;
+  }
+
+  .header-link a {
+  	color: #000000;
+  }
+}
+
