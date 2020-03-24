@@ -3,7 +3,6 @@ class Order < ApplicationRecord
 	enum way: {クレジットカード: 0,銀行振込: 1}
 
 	has_many :order_products, dependent: :destroy
-	accepts_nested_attributes_for :order_products
 
 	belongs_to :user
 
