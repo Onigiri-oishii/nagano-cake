@@ -12,6 +12,8 @@
 						admin_orders_path %></li>
 					<li class="admin-header-li"><%= link_to "ジャンル管理",
 						admin_genres_path %></li>
+					<li class="admin-header-li"><%= link_to "ログアウト",
+						destroy_admin_session_path , method: :delete %></li>
 			</ul>
 		</nav>
 
