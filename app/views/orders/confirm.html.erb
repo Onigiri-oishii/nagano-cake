@@ -5,7 +5,6 @@
 		<h3 class="col-md-offset-1 col-md-3 orders-confirm-title">注文情報確認</h3>
 	</div>
 	<%= form_for(@order) do |f| %>
-	<%= f.fields_for :order_products, @order.order_products.build do |op| %>
 	<div class="row">
 		<div class="col-md-8">
 			<table class="table table-bordered">
@@ -25,17 +24,9 @@
 							<%= attachment_image_tag cart_product.product, :image, :fill, size: "50x40", fallback: "noimage.jpg" %>
 							<%= cart_product.product.name %>
 						</td>
-						<td>
-							<%= include_tax(cart_product.product.no_tax) %>
-							<%= op.hidden_field :price, :value => (cart_product.product.no_tax * 1.1).floor.to_i %>
-						</td>
-						<td>
-							<%= cart_product.number %>
-							<%= op.hidden_field :number, :value => cart_product.number.to_i %>
-						</td>
+						<td><%= include_tax(cart_product.product.no_tax) %></td>
+						<td><%= cart_product.number %></td>
 						<td><%= get_subtotal(cart_product.product.no_tax, cart_product.number) %></td>
-							<%= op.hidden_field :production_status, :value => "着手不可" %>
-							<%= op.hidden_field :product_id, :value => cart_product.product_id %>
 					</tr>
 					<% total += total_price(cart_product.product.no_tax, cart_product.number) %>
 					<% end %>
@@ -88,6 +79,5 @@
 			<%= f.submit "購入を確定する", class: 'btn btn-success btn-lg active col-md-10' %>
 		</div>
 	</div>
-	<% end %>
 	<% end %>
 </div>
