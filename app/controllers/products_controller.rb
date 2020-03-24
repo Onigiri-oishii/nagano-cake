@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
     @genres = Genre.all
     if params[:search]
       @products = Product.where(products_search_params).page(params[:page]).per(6)
+      @genreid = params[:genres_id_var]
     else
       @products = Product.all.page(params[:page]).per(6)
     end
@@ -20,5 +21,4 @@ class ProductsController < ApplicationController
     params.fetch(:search, {}).permit(:genres_id)
   end
 end
-
 
