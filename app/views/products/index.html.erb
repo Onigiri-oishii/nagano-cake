@@ -32,7 +32,7 @@
           <div class="row item-box-sizing">
           <% @products.each do |product| %>
             <div class="item-box-list">
-                <%= attachment_image_tag product, :image_id, format: 'jpeg', fallback: "noimage.jpg", class:"item-box-image" %>
+                <%= attachment_image_tag product, :image, format: 'jpeg', fallback: "noimage.jpg", class:"item-box-image" %>
                 <%= link_to product_path(product) do %>
                 <%= product.name %><br>
               <% end %>
