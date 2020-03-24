@@ -39,7 +39,7 @@
                                     <%= attachment_image_tag product, :image, :fill, 200,200 %><br>
                                 <% end %>
                                 <%= product.name %><br>
-                                ¥<%= product.no_tax %><br>
+                                ¥<%= include_tax(product.no_tax) %><br>
                             </td>
                             <% end %>
                         </tr>
