@@ -12,8 +12,8 @@
 		<div class="col-md-4">
 			<div class="col-md-10 col-md-offset-1">
 				<!--サンプル画像-->
-				<%= attachment_image_tag @product, :image, :fill, 200,200 %>
-				<%= f.attachment_field :image, direct: true %>
+				<%= f.hidden_field :file, value: f.image.file_attacher.data.to_json %>
+				<%= image_tag attachment_url(f.image, :file, :fill, 200, 200) %>
 			</div>
 		</div>
 
