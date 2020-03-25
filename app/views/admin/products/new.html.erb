@@ -1,0 +1,66 @@
+<%= render "admin/home/header" %>
+<%= render "devise/shared/error_messages", resource: @product %>
+
+<div class="container">
+	<div class="row">
+		<h3 class="col-md-4">商品 新規登録画面</h3>
+	</div>
+
+	<%= form_for @product,url: admin_products_path do |f| %>
+	<div class="row">
+		<!--「商品画像」と「画像選択ボタン」-->
+		<div class="col-md-4">
+			<div class="col-md-10 col-md-offset-1">
+				<!--サンプル画像-->
+				<%= attachment_image_tag @product, :image, :fill, 200,200 %>
+				<%= f.attachment_field :image, direct: true %>
+			</div>
+		</div>
+
+		<!--商品情報入力欄-->
+		<div class="col-md-5">
+			<div class="row">
+				<p class="col-md-3">商品名</p>
+				<div class="col-md-9">
+					<%= f.text_field :name, class: "panel panel-default admin-product-new-form" %>
+				</div>
+			</div>
+
+			<div class="row">
+				<p class="col-md-3">商品説明</p>
+				<div class="col-md-9">
+					<%= f.text_area :introduction, class: " admin-product-new-introduction admin-product-new-form panel panel-default" %>
+				</div>
+			</div>
+
+			<div class="row admin-product-new-genre">
+				<p class="col-md-3">ジャンル</p>
+				<div class="col-md-6">
+					<%= f.collection_select :genres_id, Genre.all, :id, :name,{}, class: "form-control" %>
+				</div>
+			</div>
+
+			<div class="row">
+				<p class="col-md-3">税抜価格</p>
+				<div class="col-md-9">
+					<%= f.text_field :no_tax, class: "panel panel-default admin-product-new-form" %>
+				</div>
+			</div>
+
+			<div class="row">
+				<p class="col-md-3">販売<br>ステータス</p>
+				<div class="col-md-6">
+					<%= f.select :sale_status,[["販売中", true], ["売切れ", false]],{},class: "form-control"%>
+				</div>
+			</div>
+		</div>
+
+		<!--新規登録ボタン	-->
+		<div class="col-md-2">
+			<%= f.submit "新規登録",class: "btn btn-primary admin-product-new-submit" %>	
+		</div>
+
+	</div> <!--row-->
+	<% end %>
+
+</div>
