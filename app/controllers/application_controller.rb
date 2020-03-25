@@ -9,15 +9,6 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
-	def after_sign_out_path_for(resource)
-		case resource
-		when :admin
-			new_admin_session_path
-		when :user
-			root_path
-		end
-	end
-
 	protected
 	def configure_permitted_parameters
 		devise_parameter_sanitizer.permit(:sign_up, keys: [:firstname, :lastname, :firstname_kana, :lastname_kana, :email, :password, :postal, :address, :telephone])

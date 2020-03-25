@@ -49,6 +49,9 @@
         <div class="col-md-2"><%= f.telephone_field :telephone, class: "panel panel-default"  %></div>
     </div>
 
+    <%= f.hidden_field :password, :value => :password %>  
+    <%= f.hidden_field :password_confirmation, :value => :password %>
+
     <div class="row bttan">
       <div class="col-md-3 col-md-offset-2">
         <%= f.submit "編集内容を保存する", class: "btn btn-primary btn-block" %>
