@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  before_action :authenticate_user! , only:[:edit, :show, :confirm]
+
   def show
   	@user = User.find(params[:id])
   	unless @user.id == current_user.id

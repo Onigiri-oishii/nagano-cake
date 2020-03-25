@@ -1,4 +1,7 @@
 class Admin::OrdersController < ApplicationController
+
+  before_action :authenticate_admin! , only:[:index, :show]
+
   def index
   	@order = Order.all
   end
