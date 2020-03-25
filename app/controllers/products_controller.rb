@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+
   def index
     @genres = Genre.all
     if params[:search]
@@ -13,7 +14,9 @@ class ProductsController < ApplicationController
   	@genres = Genre.all
   	@product = Product.find(params[:id])
   	@user = current_user
-  	@cart_product = @user.cart_products.new
+    if user_signed_in?
+  	 @cart_product = @user.cart_products.new
+    end
   end
 
   private
