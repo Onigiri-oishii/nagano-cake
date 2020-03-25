@@ -1,4 +1,5 @@
 
+
 <div class="container" id="admin-header">
   <header class="user-header navbar">
   	<nav class="nav navbar-nav navbar-left">
@@ -30,7 +31,16 @@
   </div>
 
 		<!--検索機能不要  要件定義書に指示有-->
-
+		<div class="admin-header-search">
+			<input placeholder="Search">
+		</div>
+		<% else %>
+		<nav class="admin-header-nav">
+			<ul class="admin-header-ul admin-header-clearfix">
+					<li class="admin-header-li"><%= link_to "ログイン",
+						new_admin_session_path %></li>
+			</ul>
+		</nav>
 
 
   </header>
