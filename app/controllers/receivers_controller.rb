@@ -1,4 +1,7 @@
 class ReceiversController < ApplicationController
+
+  before_action :authenticate_user! , only:[:index, :edit]
+
   def index
     @user = User.find(params[:user_id])
     @receiver = current_user.receivers.new

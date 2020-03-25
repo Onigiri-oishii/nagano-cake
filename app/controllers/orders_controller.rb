@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+
+  before_action :authenticate_user! , only:[:new, :confirm, :index, :show, :thanks]
+
   def new
     @order = Order.new
     @user = User.find(current_user.id)
