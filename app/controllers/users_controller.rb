@@ -17,6 +17,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if params[:status] == "false"
       @user.update_columns(status: false)
+      @user.sign_out
       redirect_to root_path
     else
       if @user.update(user_params)
@@ -25,7 +26,7 @@ class UsersController < ApplicationController
       else
         render :edit
       end
-    end 
+    end
   end
 
   def confirm

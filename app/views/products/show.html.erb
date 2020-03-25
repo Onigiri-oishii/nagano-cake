@@ -28,12 +28,12 @@
    	    </div>
     	<div class="row">
     		<div class="col-md-5 col-md-offset-7">
-                <%= form_for [@user, @cart_product] do |f| %>
+            <%= form_for [@user, @cart_product] do |f| %>
                 <%= f.select :number, [[1, 1],[2, 2],[3, 3],[4, 4],[5, 5],[6, 6],[7, 7],[8, 8],[9, 9],[10, 10]] %>
-                    <%= f.hidden_field :product_id, :value => @product.id %>
-                    <%= f.submit "カートに入れる", class: 'btn btn-primary active' %>
-                <% end %>
-    		</div>
+                <%= f.hidden_field :product_id, :value => @product.id %>
+                <%= f.submit "カートに入れる", class: 'btn btn-primary active' %>
+            <% end %>
+        	</div>
     	</div>
     </div>
 </div>
