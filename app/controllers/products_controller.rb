@@ -3,10 +3,10 @@ class ProductsController < ApplicationController
   def index
     @genres = Genre.all
     if params[:search]
-      @products = Product.where(products_search_params).page(params[:page]).per(6)
+      @products = Product.where(products_search_params).page(params[:page]).per(10)
       @genreid = params[:genres_id_var]
     else
-      @products = Product.all.page(params[:page]).per(6)
+      @products = Product.all.page(params[:page]).per(10)
     end
   end
 

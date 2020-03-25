@@ -1,6 +1,6 @@
 class Admin::OrdersController < ApplicationController
   def index
-  	@order = Order.all
+  	@order = Order.all.page(params[:page]).per(10)
   end
 
   def update
