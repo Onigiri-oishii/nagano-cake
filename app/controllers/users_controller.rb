@@ -17,8 +17,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if params[:status] == "false"
       @user.update_columns(status: false)
-      @user.sign_out
-      redirect_to root_path
+      sign_out_and_redirect(current_user)
     else
       if @user.update(user_params)
         sign_in(@user, :bypass => true)
