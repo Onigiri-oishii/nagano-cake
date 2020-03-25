@@ -12,6 +12,8 @@
 						admin_orders_path %></li>
 					<li class="admin-header-li"><%= link_to "ジャンル管理",
 						admin_genres_path %></li>
+					<li class="admin-header-li"><%= link_to "ログアウト",
+						destroy_admin_session_path, method: :delete %></li>
 			</ul>
 		</nav>
 
@@ -19,6 +21,13 @@
 		<div class="admin-header-search">
 			<input placeholder="Search">
 		</div>
+		<% else %>
+		<nav class="admin-header-nav">
+			<ul class="admin-header-ul admin-header-clearfix">
+					<li class="admin-header-li"><%= link_to "ログイン",
+						new_admin_session_path %></li>
+			</ul>
+		</nav>
 		<% end %>
 
 
