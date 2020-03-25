@@ -1,5 +1,4 @@
 <%= render "users/header" %>
-
 <div class="container" id="user-top">
     <div class="row">
       
@@ -22,7 +21,7 @@
       
         <div class="col-md-9">
             <div class="row">
-                <div class="main-visual", style="padding-left: 35px">
+                <div class="main-visual">
                     <div class="col-md-10">
                         <h4 class="main-text">
                             ようこそ、NaganoCakeへ！<br>
@@ -35,7 +34,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-9", style="padding-left: 25px">
+                <div class="col-md-12 item-box", style="padding-left: 25px">
                     <h3>オススメ商品</h3>
                     <table>
                         <tr>
@@ -50,16 +49,17 @@
                             <% end %>
                         </tr>
                     </table>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2 col-md-offset-10">
-                 <%= link_to "もっと見る>", products_path %>
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-10">
+                             <%= link_to "もっと見る>", products_path %>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+
             <div class="row">
-                <div class="col-md-9", style="padding-left:25px">
+                <div class="col-md-12 item-box-bottom", style="padding-left:25px">
                     <h3>売れ筋ランキング</h3>
                     <table>
                         <tr>
@@ -82,4 +82,5 @@
 
     </div>
 </div>
+
 <%= render "users/footer" %>
