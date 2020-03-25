@@ -16,7 +16,7 @@
     <div class="row">
       <div class="col-md-2 col-md-offset-1">名前</div>
       <div class="col-md-1 text-right">(姓)</div>
-      <div class="col-md-2"><%= f.text_field :lastname, class: "panel panel-default"  %></div>
+      <div class="col-md-2"><%= f.text_field :lastname, autofocus: true, class: "panel panel-default"  %></div>
       <div class="col-md-1 text-right">(名)</div>
       <div class="col-md-2"><%= f.text_field :firstname, class: "panel panel-default"  %></div>
     </div>
@@ -31,7 +31,7 @@
 
     <div class="row">
       <div class="col-md-3 col-md-offset-1">メールアドレス</div>
-        <div class="col-md-2"><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "panel panel-default"  %></div>
+        <div class="col-md-2"><%= f.email_field :email, autocomplete: "email", class: "panel panel-default"  %></div>
     </div>
 
     <div class="row">
