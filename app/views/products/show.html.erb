@@ -19,7 +19,7 @@
     </div>
     <div class="col-md-8 col-md-offset-1 product-info">
    	    <div class="row">
-		<%= attachment_image_tag @product, :image, :fill, size: "300x200", fallback: "noimage.jpg", class: 'col-md-3' %>
+		<%= attachment_image_tag @product, :image, :fill, 400,400, fallback: "noimage.jpg", class: 'col-md-3' %>
 		<div class="col-md-4">
 			<h3 class="product-title"><%= @product.name %></h3>
 			<p class="product-text"><%= @product.introduction %></p>
@@ -28,12 +28,15 @@
    	    </div>
     	<div class="row">
     		<div class="col-md-5 col-md-offset-7">
+                <!--サインイン時の表示-->
+            <% if user_signed_in? %>
                 <%= form_for [@user, @cart_product] do |f| %>
-                <%= f.select :number, [[1, 1],[2, 2],[3, 3],[4, 4],[5, 5],[6, 6],[7, 7],[8, 8],[9, 9],[10, 10]] %>
+                    <%= f.select :number, [[1, 1],[2, 2],[3, 3],[4, 4],[5, 5],[6, 6],[7, 7],[8, 8],[9, 9],[10, 10]] %>
                     <%= f.hidden_field :product_id, :value => @product.id %>
                     <%= f.submit "カートに入れる", class: 'btn btn-primary active' %>
                 <% end %>
-    		</div>
+            <% end %>
+        	</div>
     	</div>
     </div>
 </div>
