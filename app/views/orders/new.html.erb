@@ -36,7 +36,7 @@
 		<div class="col-md-9 col-md-offset-1">
 			<%= radio_button_tag :receiver_type, 1, true %>
 			<%= label_tag "ご自身の住所" %><br>
-			<p><%= @user.postal + @user.address %></p>
+			<p><%= @user.postal + " " + @user.address %></p>
 			<p><%= @user.lastname + @user.firstname %></p>
 			<%= hidden_field_tag :postal1, @user.postal %>
 			<%= hidden_field_tag :address1, @user.address %>
