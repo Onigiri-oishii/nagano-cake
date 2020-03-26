@@ -29,11 +29,16 @@ class OrdersController < ApplicationController
       @order.name = params[:name1]
       @order.telephone = params[:telephone1]
     when "2" then
-      @receiver_select = Receiver.find(params[:full_address_id])
-      @order.postal = @receiver_select.postal
-      @order.address = @receiver_select.address
-      @order.name = @receiver_select.name
-      @order.telephone = params[:telephone2]
+      if params[:fill_address_id].nil?
+        redirect_to new_order_path
+        flash[:notice] = "※お届け先を選択してください"
+      else
+        @receiver_select = Receiver.find(params[:full_address_id])
+        @order.postal = @receiver_select.postal
+        @order.address = @receiver_select.address
+        @order.name = @receiver_select.name
+        @order.telephone = params[:telephone2]
+      end
     when "3" then
       if params[:postal3] == "" || params[:address3] == "" || params[:name3] == ""
         redirect_to new_order_path
