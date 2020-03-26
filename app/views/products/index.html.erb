@@ -21,7 +21,7 @@
           <% end %>
         </table>
       </div>
-
+      
       <div class="col-md-9">
         <h3 class="title">
           <% unless @genreid.nil? %>
@@ -36,8 +36,8 @@
           <div class="row item-box-sizing">
           <% @products.each do |product| %>
             <div class="item-box-list">
+              <%= link_to product_path(product) do %>
                 <%= attachment_image_tag product, :image, format: 'jpeg', fallback: "noimage.jpg", class:"item-box-image" %>
-                <%= link_to product_path(product) do %>
                 <%= product.name %><br>
               <% end %>
               ¥<%= include_tax(product.no_tax) %>

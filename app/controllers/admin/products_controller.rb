@@ -14,6 +14,7 @@ class Admin::ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    @product.genre_status = Genre.find(@product.genres_id).status
     if @product.save
       redirect_to admin_products_path(@product.id)
     else
