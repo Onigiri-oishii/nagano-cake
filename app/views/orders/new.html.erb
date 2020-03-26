@@ -54,7 +54,7 @@
 				<div class="col-md-6">
 					<select id = "full_address_id" name="full_address_id" style="width:100%;">
 						<%= @receiver.each do |r| %>
-						<option value="<%= r.id %>"><%= r.postal + " " + r.address + " " +r.name %></option>
+						<option value="<%= r.id %>"><%= r.postal + " " + r.address + " " + r.name %></option>
 						<% end %>
 					</select>
 					<%= hidden_field_tag :telephone2, @user.telephone %>
