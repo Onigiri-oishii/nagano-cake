@@ -1,12 +1,30 @@
 class ProductsController < ApplicationController
 
   def index
-    @genres = Genre.all
+    @genres = Genre.where(status: true)
+    #@genres = Genre.all
     if params[:search]
       @products = Product.where(products_search_params).page(params[:page]).per(6)
       @genreid = params[:genres_id_var]
     else
-      @products = Product.all.page(params[:page]).per(6)
+      #----------Product内でgenreが有効なもの　かつ　ページネーション----------
+      # byebug
+      # @propro = Genres.products.where(status: true)
+      # productbuf = Product.all
+      # product_buf_search = Product.new
+      # productbuf.each do |p|
+      #   if Genre.find(p.genres_id).status == true
+      #     product_buf_search = product_buf_search + p
+      #     product_buf_search.where
+      #   end
+      # end
+      #@products = Product.where(.status == true).page(params[:page]).per(6)
+
+
+     # @pro = Product.where(status: true).page(params[:page]).per(6)
+
+      @products = Product.where(genre_status: true).page(params[:page]).per(6)
+      byebug
     end
   end
 
