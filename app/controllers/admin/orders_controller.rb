@@ -3,7 +3,14 @@ class Admin::OrdersController < ApplicationController
   before_action :authenticate_admin! , only:[:index, :show]
 
   def index
-  	@order = Order.all.page(params[:page]).per(10)
+    if params[:page_serect] == "1" then
+      @order = Order.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).page(params[:page]).per(10)
+    elsif params[:page_serect] == "2" then
+      @order = Order.all.page(params[:page]).per(10)
+    elsif params[:page_serect] == "3" then
+      @order = Order.where(user_id: params[:user_serect]).page(params[:page]).per(10)
+    else
+    end
   end
 
   def update
