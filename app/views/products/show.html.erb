@@ -30,11 +30,18 @@
         	<div class="row">
         		<div class="col-md-5 col-md-offset-7">
                     <!--サインイン時の表示-->
-                <% if user_signed_in? %>
+                <% if user_signed_in? && @product.sale_status == true %>
                     <%= form_for [@user, @cart_product] do |f| %>
                         <%= f.select :number, [[1, 1],[2, 2],[3, 3],[4, 4],[5, 5],[6, 6],[7, 7],[8, 8],[9, 9],[10, 10]] %>
                         <%= f.hidden_field :product_id, :value => @product.id %>
                         <%= f.submit "カートに入れる", class: 'btn btn-primary active' %>
+                    <% end %>
+                <% else %>
+                    <% if user_signed_in? %>
+                      <p style="color:red;">※現在品切れ中</p>
+                    <% else %>
+                      <%= link_to "会員登録して購入", new_user_registration_path, class: 'btn btn-sm btn-success active' %>
+                      <%= link_to "ログインして購入", new_user_session_path, class: 'btn btn-sm btn-primary active' %>
                     <% end %>
                 <% end %>
             	</div>

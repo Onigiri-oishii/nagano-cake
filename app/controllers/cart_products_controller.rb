@@ -12,7 +12,8 @@ class CartProductsController < ApplicationController
     if @cart_product.update(cart_product_params)
       redirect_to user_cart_products_path
     else
-      render :index
+      redirect_to user_cart_products_path
+      flash[:notice] = "※1以上の個数を選択してください"
     end
   end
 

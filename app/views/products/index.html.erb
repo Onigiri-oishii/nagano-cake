@@ -40,7 +40,7 @@
                 <%= link_to product_path(product) do %>
                 <%= product.name %><br>
               <% end %>
-              ¥<%= product.no_tax.to_s(:delimited) %>
+              ¥<%= include_tax(product.no_tax) %>
             </div>
           <% end %>
           </div>
