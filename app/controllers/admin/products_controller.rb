@@ -1,4 +1,7 @@
 class Admin::ProductsController < ApplicationController
+
+  before_action :authenticate_admin! , only:[:index, :new, :show, :edit]
+
   def index
     @products = Product.all.page(params[:page]).per(10)
     @genres = Genre.all

@@ -4,10 +4,10 @@ class ProductsController < ApplicationController
     @genres = Genre.where(status: true)
     #@genres = Genre.all
     if params[:search]
-      @products = Product.where(products_search_params).page(params[:page]).per(6)
+      @products = Product.where(products_search_params).page(params[:page]).per(10)
       @genreid = params[:genres_id_var]
     else
-      @products = Product.where(genre_status: true).page(params[:page]).per(6)
+      @products = Product.where(genre_status: true).page(params[:page]).per(10)
     end
   end
 

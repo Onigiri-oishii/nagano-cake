@@ -1,8 +1,16 @@
 class OrdersController < ApplicationController
+
+  before_action :authenticate_user! , only:[:new, :confirm, :index, :show, :thanks]
+
   def new
     @order = Order.new
     @user = User.find(current_user.id)
     @receiver = Receiver.where(user_id: current_user.id)
+    @cart_products = current_user.cart_products.all
+    if @cart_products.count < 1
+      redirect_to user_cart_products_path(current_user)
+      flash[:notice] = "※カートに商品を追加してください"
+    end
   end
 
   def confirm
@@ -21,18 +29,30 @@ class OrdersController < ApplicationController
       @order.name = params[:name1]
       @order.telephone = params[:telephone1]
     when "2" then
-      @receiver_select = Receiver.find(params[:full_address_id])
-      @order.postal = @receiver_select.postal
-      @order.address = @receiver_select.address
-      @order.name = @receiver_select.name
-      @order.telephone = params[:telephone2]
+      if params[:fill_address_id].nil?
+        redirect_to new_order_path
+        flash[:notice] = "※お届け先を選択してください"
+      else
+        @receiver_select = Receiver.find(params[:full_address_id])
+        @order.postal = @receiver_select.postal
+        @order.address = @receiver_select.address
+        @order.name = @receiver_select.name
+        @order.telephone = params[:telephone2]
+      end
     when "3" then
-      @order.postal = params[:postal3]
-      @order.address = params[:address3]
-      @order.name = params[:name3]
-      @order.telephone = params[:telephone3]
+      if params[:postal3] == "" || params[:address3] == "" || params[:name3] == ""
+        redirect_to new_order_path
+        flash[:notice] = "※お届け先を入力してください"
+      else
+        @order.postal = params[:postal3]
+        @order.address = params[:address3]
+        @order.name = params[:name3]
+        @order.telephone = params[:telephone3]
+        @receiver = current_user.receivers.new(postal: params[:postal3], address: params[:address3], name: params[:name3])
+        @receiver.save
+      end
     else #例外処理
-      redirect_to new_order_path
+      redirect_to root_path
     end
   end
 

@@ -8,7 +8,7 @@ class Product < ApplicationRecord
 	validates :name, presence: true
 	validates :introduction, presence: true
 	validates :no_tax, presence: true
-	validates :sale_status, presence: true
+	validates :sale_status, inclusion: { in: [true, false] }
 	#defaultでtrueが入っている
 	#商品新規登録画面では「販売」「売切」の２択で表示する「選択してください」は含めない
 

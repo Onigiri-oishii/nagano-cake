@@ -9,16 +9,19 @@
         <table class="table table-bordered">
           <th class="text-center">ジャンル検索</th>
           <% @genres.each do |genre| %>
-            <%= form_with(scope: :search, url: products_path, method: :get, local: true) do |f| %>
-            <%= f.hidden_field :genres_id, :value => genre.id %>
-            <%= hidden_field_tag :genres_id_var, genre.id %>
-            <tr><td><%= f.submit genre.name, class: "submit-bottan" %></td></tr>
-          <% end %>
+            <tr>
+              <td>
+                <%= form_with(scope: :search, url: products_path, method: :get, local: true) do |f| %>
+                <%= f.hidden_field :genres_id, :value => genre.id %>
+                <%= hidden_field_tag :genres_id_var, genre.id %>
+                <%= f.submit genre.name, class: "submit-bottan" %>
+                <% end %>
+              </td>
+            </tr>
           <% end %>
         </table>
       </div>
-
-
+      
       <div class="col-md-9">
         <h3 class="title">
           <% unless @genreid.nil? %>
@@ -37,7 +40,7 @@
                 <%= attachment_image_tag product, :image, format: 'jpeg', fallback: "noimage.jpg", class:"item-box-image" %>
                 <%= product.name %><br>
               <% end %>
-              ¥<%= product.no_tax.to_s(:delimited) %>
+              ¥<%= include_tax(product.no_tax) %>
             </div>
           <% end %>
           </div>

@@ -1,4 +1,7 @@
 class CartProductsController < ApplicationController
+
+  before_action :authenticate_user! , only:[:index]
+
   def index
     @user = current_user
     @cart_products = current_user.cart_products.all
@@ -9,7 +12,8 @@ class CartProductsController < ApplicationController
     if @cart_product.update(cart_product_params)
       redirect_to user_cart_products_path
     else
-      render :index
+      redirect_to user_cart_products_path
+      flash[:notice] = "※1以上の個数を選択してください"
     end
   end
 
@@ -26,8 +30,12 @@ class CartProductsController < ApplicationController
   end
 
   def create
-    @cart_product = current_user.cart_products.new(cart_product_params)
-    if @cart_product.save
+    @new_cart_product = current_user.cart_products.new(cart_product_params)
+    if @cart_product = current_user.cart_products.find_by(product_id: @new_cart_product.product_id)
+      @cart_product.number += @new_cart_product.number
+      @cart_product.update_columns(number: @cart_product.number)
+      redirect_to user_cart_products_path(current_user)
+    elsif @new_cart_product.save
       redirect_to user_cart_products_path(current_user)
     else
       render 'products/show'
