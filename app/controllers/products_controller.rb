@@ -2,7 +2,6 @@ class ProductsController < ApplicationController
 
   def index
     @genres = Genre.where(status: true)
-    @product_count = Product.all.count
     if params[:search]
       @products = Product.where(products_search_params).page(params[:page]).per(8)
       @genreid = params[:genres_id_var]

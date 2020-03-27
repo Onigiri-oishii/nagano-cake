@@ -2,25 +2,29 @@
 
 <div class="container" id="admin-order-index">
 	<div class="row">
-		<div class="col-md-3">
-			<h3>注文一覧画面</h3>
+		<div class="col-md-5">
+			<h3><%= @title %></h3>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
+		<div class="col-md-10 col-md-offset-1">
 			<table class="table table-bordered">
 				<tr>
-					<th>購入日時</th><th>購入者</th><th>注文個数</th><th>注文ステータス</th><th></th>
+					<th class="col-md-3">購入日時</th>
+					<th class="col-md-3">購入者</th>
+					<th class="col-md-2">注文個数</th>
+					<th class="col-md-2">注文ステータス</th>
+					<th class="col-md-2"></th>
 				</tr>
 				<tbody>
-					<% @order.each do |order| %>
+					<% @orders.each do |order| %>
 						<% total_var = 0 %>
 						<% order.order_products.each do |order_product| %>
 						<% total_var = total_var + order_product.number %>
 						<% end %>
 						<tr>
 							<td><%= order.created_at %></td>
-							<td><%= order.name %></td>
+							<td><%= order.user.lastname + order.user.firstname %></td>
 							<td><%= total_var %></td>
 							<td><%= order.order_status %></td>
 							<td><%= link_to "注文詳細",admin_order_path(order.id), class: "btn btn-primary" %></td>
@@ -29,9 +33,9 @@
 				</tbody>
 			</table>
 
-			<div class="paginate">
-      			<%= paginate @order %>
-    		</div>
+			<div class="paginate col-md-offset-2">
+      	<%= paginate @orders %>
+    	</div>
 
 		</div>
 	</div>
