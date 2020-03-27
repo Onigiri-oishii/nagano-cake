@@ -40,8 +40,8 @@
                         <td style="padding-right: 15px">
                             <%= link_to (product) do %>
                                 <%= attachment_image_tag product, :image, size: "160x110", fallback: "noimage.jpg" %><br>
+                                <%= product.name %><br>
                             <% end %>
-                            <%= link_to product.name, product_path(product) %><br>
                             ¥<%= include_tax(product.no_tax) %><br>
                         </td>
                         <% end %>
