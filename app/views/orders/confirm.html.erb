@@ -1,4 +1,5 @@
 <%= render 'users/header' %>
+<%= render 'users/campeign' %>
 
 <div class="container">
 	<div class="row">
@@ -37,7 +38,15 @@
 			<table class="table table-bordered">
 				<tr>
 					<th class="orders-list-title">送料</th>
-					<td>800<%= f.hidden_field :fee, :value => 800 %></td>
+					<td>
+						<% if total >= 5000 %>
+							<% fee = 0 %>
+							<%= fee %><%= f.hidden_field :fee, :value => fee %>
+						<% else %>
+							<% fee = 800 %>
+							<%= fee %><%= f.hidden_field :fee, :value => fee %>
+						<% end %>
+					</td>
 				</tr>
 				<tr>
 					<th class="orders-list-title">商品合計</th>
@@ -49,8 +58,8 @@
 				<tr>
 					<th class="orders-list-title">請求金額</th>
 					<td>
-						<%= (total + 800).to_s(:delimited, delimiter: ',') %>
-						<%= f.hidden_field :total_pay, :value => (total + 800).to_i %>
+						<%= (total + fee).to_s(:delimited, delimiter: ',') %>
+						<%= f.hidden_field :total_pay, :value => (total + fee).to_i %>
 					</td>
 				</tr>
 			</table>

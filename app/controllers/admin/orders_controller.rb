@@ -3,12 +3,19 @@ class Admin::OrdersController < ApplicationController
   before_action :authenticate_admin! , only:[:index, :show]
 
   def index
-    if params[:page_serect] == "1" then
-      @order = Order.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).page(params[:page]).per(10)
-    elsif params[:page_serect] == "2" then
-      @order = Order.all.page(params[:page]).per(10)
-    elsif params[:page_serect] == "3" then
-      @order = Order.where(user_id: params[:user_serect]).page(params[:page]).per(10)
+    if params[:page_select] == "1" then
+      @orders = Order.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).order(created_at: :desc).page(params[:page]).per(10)
+      @title = "#{Date.today}の注文一覧"
+    elsif params[:page_select] == "2" then
+      @orders = Order.all.order(created_at: :desc).page(params[:page]).per(10)
+      @title = "注文一覧"
+    elsif params[:page_select] == "3" then
+      @orders = Order.where(user_id: params[:user_select]).order(created_at: :desc).page(params[:page]).per(10)
+      @user = User.find_by(id: params[:user_select])
+      @title = "#{@user.lastname + @user.firstname} 様の注文一覧"
+    elsif params[:page_select] == "4" then
+      @orders = Order.where(created_at: Time.zone.now.beginning_of_month..Time.zone.now.end_of_month).order(created_at: :desc).page(params[:page]).per(10)
+      @title = "#{Date.today.month}月の注文一覧"
     else
     end
   end

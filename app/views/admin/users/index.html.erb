@@ -24,7 +24,9 @@
 									<%= link_to user.lastname + user.firstname, admin_user_path(user.id) %>
 								</td>
 								<td><%= user.email %></td>
-								<td><%= user.status %></td>
+								<td>
+									<%= user.status == true ? "有効" : "無効" %>
+								</td>
 							</tr>
 						<% end %>
 					</tbody>

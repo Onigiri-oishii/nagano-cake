@@ -2,11 +2,36 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-12 admin-top-main">
-			<h2 class="admin-top-title">管理者画面</h2>
-			<h2 class="admin-top-content">
-				本日の注文件数　　　<%= link_to "#{@orders.count}", admin_orders_path(page_serect: "1") %>　件
-			</h2>
-		</div>
+		<h2 class="admin-top-title">管理者画面</h2>
+	</div>
+	<div class="row admin-top-content">
+		<h2 class="daily-sales-order">
+			<%= Date.today %>の注文件数
+			<%= link_to "#{@daily_orders.count}", admin_orders_path(page_select: "1") %>　件
+		</h2>
+	</div>
+	<div class="row admin-top-content">
+		<% daily_sales = 0 %>
+		<h2 class="daily-sales-price">
+			<% @daily_orders.each do |daily_order| %>
+			<% daily_sales += daily_order.total_products %>
+			<% end %>
+			<%= Date.today %>の売上金額　　<%= daily_sales.to_s(:delimited, delimiter: ',') %>　円
+		</h2>
+	</div>
+	<div class="row admin-top-content">
+		<h2 class="monthly-sales-order">
+			<%= Date.today.month %>月の注文件数
+			<%= link_to "#{@monthly_orders.count}", admin_orders_path(page_select: "4") %>　件
+		</h2>
+	</div>
+	<div class="row admin-top-content">
+		<% monthly_sales = 0 %>
+		<h2 class="monthly-sales-price">
+			<% @monthly_orders.each do |monthly_order| %>
+			<% monthly_sales += monthly_order.total_products %>
+			<% end %>
+			<%= Date.today.month %>月の売上金額　　<%= monthly_sales.to_s(:delimited, delimiter: ',') %>　円
+		</h2>
 	</div>
 </div>

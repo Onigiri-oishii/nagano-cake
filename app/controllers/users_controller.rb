@@ -32,6 +32,13 @@ class UsersController < ApplicationController
   end
 
   def confirm
+    @orders = current_user.orders.all
+    @orders.each do |order|
+      if order.order_status == "入金待ち"
+        flash[:notice] = "※お支払いが完了していない注文が存在するため退会できません"
+        redirect_to edit_user_path(current_user) and return
+      end
+    end
   end
 
   private
