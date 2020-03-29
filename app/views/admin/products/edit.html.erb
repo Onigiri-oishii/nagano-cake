@@ -43,7 +43,14 @@
 			<div class="row">
 				<p class="col-md-3">税抜価格</p>
 				<div class="col-md-6">
-					<%= f.number_field :no_tax, class: "panel panel-default edit-form" %>
+					<%= f.number_field :no_tax, class: "panel panel-default edit-form", id: "no-tax" %>
+				</div>
+			</div>
+
+			<div class="row">
+				<p class="col-md-3">（税込価格）</p>
+				<div class="col-md-6">
+					<input type="number" class="panel panel-default" id="with-tax"></input>
 				</div>
 			</div>
 
@@ -63,5 +70,19 @@
 
 	</div> <!--row-->
 	<% end %>
+
+	<script>
+		$('#no-tax').change(function(){
+			var price = $('#no-tax').val();
+			var withTax = price * 1.1;
+			$('#with-tax').val(Math.round(withTax));
+		});
+
+		$('#with-tax').change(function(){
+			var price = $('#with-tax').val();
+			var noTax = price / 1.1;
+			$('#no-tax').val(Math.round(noTax));
+		});
+	</script>
 
 </div>
