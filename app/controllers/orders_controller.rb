@@ -80,7 +80,7 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = current_user.orders.all
+    @orders = current_user.orders.all.order(created_at: "DESC")
   end
 
   def show
