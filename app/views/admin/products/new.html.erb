@@ -43,7 +43,14 @@
 			<div class="row">
 				<p class="col-md-3">税抜価格</p>
 				<div class="col-md-9">
-					<%= f.number_field :no_tax, step: 10, class: "panel panel-default admin-product-new-form" %>
+					<%= f.number_field :no_tax, class: "panel panel-default admin-product-new-form", id: "no-tax" %>
+				</div>
+			</div>
+
+			<div class="row">
+				<p class="col-md-3">（税込価格）</p>
+				<div class="col-md-9">
+					<input type="number" class="panel panel-default" id="with-tax"></input>
 				</div>
 			</div>
 
@@ -57,10 +64,24 @@
 
 		<!--新規登録ボタン	-->
 		<div class="col-md-2">
-			<%= f.submit "新規登録",class: "btn btn-primary admin-product-new-submit" %>	
+			<%= f.submit "新規登録",class: "btn btn-primary admin-product-new-submit" %>
 		</div>
 
 	</div> <!--row-->
 	<% end %>
+
+	<script>
+		$('#no-tax').change(function(){
+			var price = $('#no-tax').val();
+			var withTax = price * 1.1;
+			$('#with-tax').val(Math.round(withTax));
+		});
+
+		$('#with-tax').change(function(){
+			var price = $('#with-tax').val();
+			var noTax = price / 1.1;
+			$('#no-tax').val(Math.round(noTax));
+		});
+	</script>
 
 </div>
