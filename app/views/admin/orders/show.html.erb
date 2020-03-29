@@ -66,7 +66,7 @@
 				</tr>
 
 				<% @order_products.each do |o| %>
-				<tr>
+				<tr  class="table-box">
 					<td><%= o.product.name %></td>
 					<td><%= o.price.to_s(:delimited, delimiter: ',') %></td>
 					<td><%= o.number %></td>

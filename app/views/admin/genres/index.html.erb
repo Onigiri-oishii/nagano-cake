@@ -37,8 +37,9 @@
 					<th></th>
 				</tr>
 
+
 				<% @genres.each do |genre| %>
-				<tr>
+				<tr class="table-box">
 					<td><%= genre.name %></td>
 					<td><% if genre.status == true %>
 						<p>有効</p>

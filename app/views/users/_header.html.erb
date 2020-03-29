@@ -10,14 +10,14 @@
       <ul class="nav navbar-nav navbar-right nav-item-box">
         <% if user_signed_in? && current_user.status == true %>
           <p class="user-header-text navbar-text">ようこそ、<%= current_user.lastname %> さん！</p>
-          <li class="user-header-link"><%= link_to "マイページ", user_path(current_user) %></li>
-          <li class="user-header-link"><%= link_to "商品一覧", products_path %></li>
-          <li class="user-header-link"><%= link_to "カート", user_cart_products_path(current_user) %></li>
-          <li class="user-header-link"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+          <li class="user-header-link"><%= link_to "マイページ", user_path(current_user), class:"user-header-link-box" %></li>
+          <li class="user-header-link"><%= link_to "商品一覧", products_path, class:"user-header-link-box" %></li>
+          <li class="user-header-link"><%= link_to "カート", user_cart_products_path(current_user), class:"user-header-link-box" %></li>
+          <li class="user-header-link"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"user-header-link-box" %></li>
         <% else %>
-          <li class="user-header-link"><%= link_to "商品一覧", products_path %></li>
-          <li class="user-header-link"><%= link_to "新規登録", new_user_registration_path %></li>
-          <li class="user-header-link"><%= link_to "ログイン", new_user_session_path %></li>
+          <li class="user-header-link"><%= link_to "商品一覧", products_path, class:"user-header-link-box"  %></li>
+          <li class="user-header-link"><%= link_to "新規登録", new_user_registration_path, class:"user-header-link-box" %></li>
+          <li class="user-header-link"><%= link_to "ログイン", new_user_session_path, class:"user-header-link-box" %></li>
         <% end %>
       </ul>
     </nav>
